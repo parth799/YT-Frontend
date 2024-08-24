@@ -6,9 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from "react-dom/client";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+  // <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>
+  // </Provider>
 )
