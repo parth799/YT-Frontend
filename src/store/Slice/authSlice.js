@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify";
 import axiosIN from "../../hooks/axiosIN"
 
@@ -29,4 +29,28 @@ export const createAccount = createAsyncThunk("register", async (data) => {
         toast.error(error?.response?.data?.message);
         throw error;
     }
-});N
+});
+
+const authSlice = createSlice({
+    name:"auth",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(createAccount.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(createAccount.fulfilled, (state, action) => {
+                state.loading = false;
+                state.status = true;
+                state.userData = action.payload;
+            })
+            .addCase(createAccount.rejected, (state) => {
+                state.loading = false;
+                state.status = false;
+                state.userData = null;
+            })
+    }
+})
+
+export default authSlice.reducer;
