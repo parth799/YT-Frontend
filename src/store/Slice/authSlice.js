@@ -29,4 +29,4 @@ export const createAccount = createAsyncThunk("register", async (data) => {
         toast.error(error?.response?.data?.message);
         throw error;
     }
-});
+});N

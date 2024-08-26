@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Logo from "../miniComponents/Logo"
-import Search from "../miniComponents/Search"
+import Logo from "../components/Logo"
+import Search from "../components/Search"
 import { CiSearch } from "react-icons/ci"
 import { SlMenu } from "react-icons/sl"
 
