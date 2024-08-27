@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
     html {
         font-family: 'Hedvig Letters Sans', sans-serif;
         font-family: 'Space Grotesk', sans-serif;
     }
-}
+} */
 
 html {
     overflow: scroll;

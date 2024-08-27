@@ -7,7 +7,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:8000/api/v1'
+      '/api': {
+        target: 'http://localhost:8000', // Backend server URL
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
   css: {

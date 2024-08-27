@@ -1,13 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import axiosIN from "../../hooks/axiosIN"
+import axiosIN from "../../hooks/axiosIN";
 
 const initialState = {
-    loding : false,
-    status : false,
-    userData: null,
-}
-
+    loading: false,
+    status: !!localStorage.getItem("token"),
+    userData: localStorage.getItem("username") ? {
+        username: localStorage.getItem("username"),
+        avatar: { url: localStorage.getItem("avatar") }
+    } : null,
+};
 
 export const createAccount = createAsyncThunk("register", async (data) => {
     const formData = new FormData();
@@ -21,36 +23,215 @@ export const createAccount = createAsyncThunk("register", async (data) => {
         formData.append("coverImage", data.coverImage[0]);
     }
     try {
-        const response = await axiosIN.post("/users/register", formData)
-        console.log(response.data);
+        const response = await axiosIN.post("/users/register", formData, {
+            headers: {
+                'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+            },
+        });
+        
         toast.success("Account created successfully");
-        return response.data;
+        return response.data; 
+
     } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.error);
         throw error;
     }
 });
 
+export const userLogin = createAsyncThunk("login", async (data) => {
+    try {
+        const response = await axiosIN.post("/users/login", data);
+        toast.success("Logged in successfully");
+        
+        // Store the user data and token in localStorage
+        const { user, accessToken } = response.data.data;
+        localStorage.setItem("username", user.username);
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("avatar", user.avatar.url);
+
+        return user;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const userLogout = createAsyncThunk("logout", async () => {
+    try {console.log("user", response.data.data.accessToken)
+        const response = await axiosIN.post("/users/logout");
+        toast.success("Logged out successfully");
+        return null;  // Logout usually clears the user data
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+export const refreshAccessToken = createAsyncThunk(
+    "refreshAccessToken",
+    async (data) => {
+        try {
+            const response = await axiosIN.post(
+                "/users/refresh-token",
+                data
+            );
+            return response.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
+export const changePassword = createAsyncThunk(
+    "changePassword",
+    async (data) => {
+        try {
+            const response = await axiosIN.post(
+                "/users/change-password",
+                data
+            );
+            toast.success(response.data?.message);
+            return response.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
+export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
+    // Check if user data exists in localStorage
+    const username = localStorage.getItem("username");
+    const token = localStorage.getItem("token");
+    const avatar = localStorage.getItem("avatar");
+
+    if (username && token) {
+        return { username, avatar };
+    } else {
+        const response = await axiosIN.get("/users/current-user");
+        return response.data.user;  
+    }
+});
+
+
+export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {
+    try {
+        const response = await axiosIN.patch(
+            "/users/update-avatar",
+            avatar
+        );
+        toast.success("Updated details successfully!!!");
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+});
+
+
+export const updateCoverImg = createAsyncThunk(
+    "updateCoverImg",
+    async (coverImage) => {
+        try {
+            const response = await axiosIN.patch(
+                "/users/update-coverImg",
+                coverImage
+            );
+            toast.success(response.data?.message);
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
+export const updateUserDetails = createAsyncThunk(
+    "updateUserDetails",
+    async (data) => {
+        try {
+            const response = await axiosIN.patch(
+                "/users/update-user",
+                data
+            );
+            toast.success("Updated details successfully!!!");
+            return response.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
 const authSlice = createSlice({
-    name:"auth",
+    name: "auth",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder
-            .addCase(createAccount.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(createAccount.fulfilled, (state, action) => {
-                state.loading = false;
-                state.status = true;
-                state.userData = action.payload;
-            })
-            .addCase(createAccount.rejected, (state) => {
-                state.loading = false;
-                state.status = false;
-                state.userData = null;
-            })
-    }
-})
+        builder.addCase(createAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(createAccount.fulfilled, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(userLogin.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(userLogin.fulfilled, (state, action) => {
+            state.loading = false;
+            state.status = true;
+            state.userData = action.payload;
+        });
+        builder.addCase(userLogout.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(userLogout.fulfilled, (state) => {
+            state.loading = false;
+            state.status = false;
+            state.userData = null;
+        });
+        builder.addCase(getCurrentUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.status = true;
+            state.userData = action.payload;
+        });
+        builder.addCase(getCurrentUser.rejected, (state) => {
+            state.loading = false;
+            state.status = false;
+            state.userData = null;
+        });
+        builder.addCase(updateAvatar.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(updateAvatar.fulfilled, (state, action) => {
+            state.loading = false;
+            state.userData = action.payload;
+        });
+        builder.addCase(updateAvatar.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(updateCoverImg.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(updateCoverImg.fulfilled, (state, action) => {
+            state.loading = false;
+            state.userData = action.payload;
+        });
+        builder.addCase(updateCoverImg.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(updateUserDetails.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(updateUserDetails.fulfilled, (state, action) => {
+            state.loading = false;
+            state.userData = action.payload;
+        });
+    },
+});
 
 export default authSlice.reducer;
