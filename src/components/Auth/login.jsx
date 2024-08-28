@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, userLogin } from "../../store/Slice/authSlice";
-import LoginLayout from "./loginLayout";
+import LoginLayout from "../loader/LoginLayout";
 import { toast } from "react-toastify";
 
 function Login() {
@@ -26,8 +26,6 @@ function Login() {
 
     const response = await dispatch(userLogin(loginData))
     const user = await dispatch(getCurrentUser());
-    console.log("response",response);
-    console.log(user);
     if (user && response?.payload) {
       navigate('/')
     }

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createAccount, userLogin } from "../../store/Slice/authSlice.js";
-import LoginLayout from "./loginLayout.jsx";
+import LoginLayout from "../loader/LoginLayout.jsx";
 function Signup() {
   const {
     handleSubmit,

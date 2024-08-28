@@ -20,12 +20,12 @@ function Navbar() {
   const authStatus = useSelector((state) => state.auth.status);
   const username = useSelector((state) => state.auth?.userData?.username);
   const profileImg = useSelector((state) => state.auth.userData?.avatar?.url);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logout = async () => {
     await dispatch(userLogout());
-    // Clear localStorage on logout
     localStorage.clear();
     navigate("/");
     window.location.reload();

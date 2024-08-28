@@ -48,16 +48,6 @@ export const userLogin = createAsyncThunk("login", async (data) => {
     }
 });
 
-export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
-    const token = localStorage.getItem("token");
-        const response = await axiosIN.get("/users/current-user", {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-        return response.data.user;  
-});
-
 export const userLogout = createAsyncThunk("logout", async () => {
     try {console.log("user", response.data.data.accessToken)
         const response = await axiosIN.post("/users/logout");
@@ -102,6 +92,15 @@ export const changePassword = createAsyncThunk(
     }
 );
 
+export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
+    const token = localStorage.getItem("token");
+        const response = await axiosIN.get("/users/current-user", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return response.data.data;  
+});
 
 export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {
     try {
