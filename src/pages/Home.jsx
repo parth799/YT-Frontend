@@ -13,7 +13,6 @@ function Home() {
   const loading = useSelector((state) => state.video?.loading);
   const hasNextPage = useSelector((state) => state.video?.videos?.hasNextPage);
   const [page, setPage] = useState(1)
-console.log(videos);
 
   useEffect(() => {
     dispatch(getAllVideos({}));

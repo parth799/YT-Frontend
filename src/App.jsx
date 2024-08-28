@@ -9,6 +9,7 @@ import { getCurrentUser } from "./store/Slice/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import AuthLayout from "./components/components/AuthLayout";
+import VideoDetail from "./components/components/Videos/VideoDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,8 +40,30 @@ function App() {
                         }
                     ></Route>
         </Route>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/signup" element={<Signup />}/>
+        <Route
+                    path="/login"
+                    element={
+                        <AuthLayout authentication={false}>
+                            <Login />
+                        </AuthLayout>
+                    }
+                />
+                <Route
+                    path="/signup"
+                    element={
+                        <AuthLayout authentication={false}>
+                            <Signup />
+                        </AuthLayout>
+                    }
+                />
+                <Route
+                    path="/watch/:videoId"
+                    element={
+                        <AuthLayout authentication>
+                            <VideoDetail />
+                        </AuthLayout>
+                    }
+                />
       </Routes>
     </>
   );

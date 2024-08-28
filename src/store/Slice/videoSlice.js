@@ -12,11 +12,11 @@ const initialState = {
         hasNextPage: false
     },
     video: null,
-    publishToggles: false,
+    publishToggled: false,
 }
 
 export const getAllVideos = createAsyncThunk('getAllVideos',
-    async ({userId, sortBy, sortType, query,page,limit}) =>{
+    async ({ userId, sortBy, sortType, query, page, limit }) => {
         try {
             const url = new URL(`${BASE_URL}/video`);
 
@@ -30,7 +30,7 @@ export const getAllVideos = createAsyncThunk('getAllVideos',
             }
             const response = await axiosIN.get(url);
             console.log(">>>>", response);
-            
+
             return response.data.data;
         } catch (error) {
             toast.error(error.response.data.message);
@@ -39,29 +39,158 @@ export const getAllVideos = createAsyncThunk('getAllVideos',
     }
 )
 
+export const publishAvideo = createAsyncThunk('publishAvideo',
+    async (data) => {
+        const formData = new FormData();
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        formData.append("videoFile", data.videoFile[0]);
+        formData.append("thumbnail", data.thumbnail[0]);
+
+        try {
+            const response = await axiosIN.post("/video", formData, {
+                headers: {
+                    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                }
+            });
+            toast.success(response?.data?.message);
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+)
+
+export const updateAVideo = createAsyncThunk(
+    "updateAVideo",
+    async ({ videoId, data }) => {
+        const formData = new FormData();
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        formData.append("thumbnail", data.thumbnail[0]);
+
+        try {
+            const response = await axiosIN.patch(
+                `/video/v/${videoId}`,
+                formData, {
+                headers: {
+                    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                }
+            }
+            );
+            toast.success(response?.data?.message);
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
+export const deleteAVideo = createAsyncThunk('deleteAVideo', async (videoId) =>{
+    try {
+        const response = await axiosIN.delete(`/video/v/${videoId}`);
+        toast.success("Video deleted successfully");
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+})
+
+export const getVideoById = createAsyncThunk("getVideoById", async ({videoId}) => {
+    try {
+        const response = await axiosIN.get(`/video/v/${videoId}`);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+})
+
+export const togglePublishStatus = createAsyncThunk("togglePublishStatus", async(videoId) => {
+    try {
+        const response = await axiosIN.patch(`/video/toggle/publish/${videoId}`);
+        toast.success(response.data.message);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+})
 
 const videoSlice = createSlice({
-    name:"video",
+    name: "video",
     initialState,
-    reducers:{
-        updateUploadState: (state)=>{
-            state.uploading =false;
-            state.uploaded =false;
+    reducers: {
+        updateUploadState: (state) => {
+            state.uploading = false;
+            state.uploaded = false;
         },
-        makeVideosNull: (state)=>{
+        makeVideosNull: (state) => {
             state.videos.docs = [];
         },
     },
-    extraReducers:(builder) => {
+    extraReducers: (builder) => {
         builder.addCase(getAllVideos.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(getAllVideos.fulfilled, (state, action) => {
             state.loading = false;
-            state.videos.docs = [...state.videos.docs,...action.payload.docs];
+            state.videos.docs = [...state.videos.docs, ...action.payload.docs];
             state.videos.hasNextPage = action.payload.hasNextPage;
         });
         builder.addCase(getAllVideos.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(publishAvideo.pending,(state) => {
+            state.uploading = true;
+        })
+        builder.addCase(publishAvideo.fulfilled, (state) => {
+            state.uploading = false;
+            state.uploaded = true;
+        });
+        builder.addCase(publishAvideo.rejected, (state) => {
+            state.uploading = false;
+        });
+        builder.addCase(updateAVideo.pending, (state) => {
+            state.uploading = true;
+        });
+        builder.addCase(updateAVideo.fulfilled, (state) => {
+            state.uploading = false;
+            state.uploaded = true;
+        });
+        builder.addCase(updateAVideo.rejected, (state) => {
+            state.uploading = false;
+        });
+        builder.addCase(deleteAVideo.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteAVideo.fulfilled, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(deleteAVideo.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(getVideoById.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getVideoById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.video = action.payload;
+        });
+        builder.addCase(getVideoById.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(togglePublishStatus.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(togglePublishStatus.fulfilled, (state) => {
+            state.loading = false;
+            state.publishToggled = !state.publishToggled;
+        });
+        builder.addCase(togglePublishStatus.rejected, (state) => {
             state.loading = false;
         });
     }
