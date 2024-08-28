@@ -9,7 +9,7 @@ import { getCurrentUser } from "./store/Slice/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import AuthLayout from "./components/components/AuthLayout";
-import VideoDetail from "./components/components/Videos/VideoDetail";
+import VideoDetail from "./components/Videos/VideoDetail";
 
 function App() {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "../components/components/InfiniteScroll"
 import { useCallback, useEffect, useState } from "react";
 import { getAllVideos, makeVideosNull } from "../store/Slice/videoSlice";
-import VideoList from "../components/components/Videos/VideoList";
+import VideoList from "../components/Videos/VideoList";
 import HomeLoader from "../components/loader/HomeLoader";
 
 function Home() {

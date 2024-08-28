@@ -52,7 +52,7 @@ export const userLogout = createAsyncThunk("logout", async () => {
     try {console.log("user", response.data.data.accessToken)
         const response = await axiosIN.post("/users/logout");
         toast.success("Logged out successfully");
-        return null;  // Logout usually clears the user data
+        return null;
     } catch (error) {
         toast.error(error?.response?.data?.error);
         throw error;
@@ -93,12 +93,8 @@ export const changePassword = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
-    const token = localStorage.getItem("token");
-        const response = await axiosIN.get("/users/current-user", {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
+    // const token = localStorage.getItem("token");
+        const response = await axiosIN.get("/users/current-user");
         return response.data.data;  
 });
 

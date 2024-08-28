@@ -29,7 +29,7 @@ function Login() {
     if (user && response?.payload) {
       navigate('/')
     }
-    toast.success("Login successful!")
+    window.location.reload();
   };
 
   if (loading) {
