@@ -2,11 +2,22 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
-import Login from "./components/Auth/Login"
 import "react-toastify/dist/ReactToastify.css";
-import Signup from "./components/Auth/signup";
+import Signup from "./components/Auth/Signup";
+import Login from "./components/Auth/login";
+import { getCurrentUser } from "./store/Slice/authSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    
+    dispatch(getCurrentUser());
+    console.log(">>>>>>>>>>>");
+    
+}, [dispatch]);
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} />

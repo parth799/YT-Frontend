@@ -4,11 +4,8 @@ import axiosIN from "../../hooks/axiosIN";
 
 const initialState = {
     loading: false,
-    status: !!localStorage.getItem("token"),
-    userData: localStorage.getItem("username") ? {
-        username: localStorage.getItem("username"),
-        avatar: { url: localStorage.getItem("avatar") }
-    } : null,
+    status: false,
+    userData: null,
 };
 
 export const createAccount = createAsyncThunk("register", async (data) => {
@@ -41,19 +38,24 @@ export const createAccount = createAsyncThunk("register", async (data) => {
 export const userLogin = createAsyncThunk("login", async (data) => {
     try {
         const response = await axiosIN.post("/users/login", data);
-        toast.success("Logged in successfully");
-        
-        // Store the user data and token in localStorage
         const { user, accessToken } = response.data.data;
-        localStorage.setItem("username", user.username);
         localStorage.setItem("token", accessToken);
-        localStorage.setItem("avatar", user.avatar.url);
 
         return user;
     } catch (error) {
         toast.error(error?.response?.data?.error);
         throw error;
     }
+});
+
+export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
+    const token = localStorage.getItem("token");
+        const response = await axiosIN.get("/users/current-user", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return response.data.user;  
 });
 
 export const userLogout = createAsyncThunk("logout", async () => {
@@ -99,20 +101,6 @@ export const changePassword = createAsyncThunk(
         }
     }
 );
-
-export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
-    // Check if user data exists in localStorage
-    const username = localStorage.getItem("username");
-    const token = localStorage.getItem("token");
-    const avatar = localStorage.getItem("avatar");
-
-    if (username && token) {
-        return { username, avatar };
-    } else {
-        const response = await axiosIN.get("/users/current-user");
-        return response.data.user;  
-    }
-});
 
 
 export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {
