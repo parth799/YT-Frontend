@@ -3,12 +3,15 @@ import Navbar from "../Headers/Navbar";
 import Video from "./Video";
 import { useParams } from "react-router-dom";
 import { getVideoById } from "../../store/Slice/videoSlice";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   cleanUpComments,
   getVideoComments,
 } from "../../store/Slice/commentSlice";
 import Description from "../components/Description";
+import Comment from "../comment/Comment";
+import InfiniteScroll from "../components/InfiniteScroll";
+import CommentList from "../comment/CommentList";
 
 function VideoDetail() {
   const dispatch = useDispatch();
@@ -27,6 +30,14 @@ function VideoDetail() {
     }
     return () => dispatch(cleanUpComments());
   }, [dispatch, videoId]);
+
+  const fetchMoreComments = useCallback(() => {
+    if (!loading && hasNextPage) {
+        dispatch(getVideoComments({ videoId, page: page + 1 }));
+        setPage((prev) => prev + 1);
+    }
+}, [page, loading, hasNextPage, dispatch, videoId]);
+
   return (
     <>
       <Navbar />
@@ -50,6 +61,32 @@ function VideoDetail() {
         {totalComments} comments
       </div>
       {/* <TwiteAndComment /> */}
+      <Comment comment={true} videoId={video?._id} />
+      <InfiniteScroll 
+      fetchMore={fetchMoreComments}
+      hasNextPage={hasNextPage}
+      >
+        <div className="w-full sm:max-w-4xl">
+        {comments?.map((comment) => (
+                        <CommentList
+                            key={comment?._id}
+                            avatar={comment?.owner?.avatar?.url}
+                            commentId={comment?._id}
+                            content={comment?.content}
+                            createdAt={comment?.createdAt}
+                            fullName={comment?.owner?.fullName}
+                            isLiked={comment?.isLiked}
+                            likesCount={comment?.likesCount}
+                            username={comment?.owner?.username}
+                        />
+                    ))}
+                    {/* {loading && (
+                        <div className="w-full flex justify-center items-center">
+                            <Spinner width={10} />
+                        </div>
+                    )} */}
+        </div>
+      </InfiniteScroll>
     </>
   );
 }
