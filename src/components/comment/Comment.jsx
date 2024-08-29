@@ -14,7 +14,7 @@ function Comment({ tweet, comment, videoId }) {
             console.log("crete tweet");
             // dispatch(createTweet(data))
         } else if (comment) {
-            dispatch(createAComment({content:data.content, videoId}))
+            dispatch(createAComment({content:data.content, videoId , dispatch:dispatch}))
         }
         setValue("content", "");
     }

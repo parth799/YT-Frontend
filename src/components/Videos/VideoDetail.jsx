@@ -12,6 +12,7 @@ import Description from "../components/Description";
 import Comment from "../comment/Comment";
 import InfiniteScroll from "../components/InfiniteScroll";
 import CommentList from "../comment/CommentList";
+import Loader from "../components/Loader";
 
 function VideoDetail() {
   const dispatch = useDispatch();
@@ -33,10 +34,10 @@ function VideoDetail() {
 
   const fetchMoreComments = useCallback(() => {
     if (!loading && hasNextPage) {
-        dispatch(getVideoComments({ videoId, page: page + 1 }));
-        setPage((prev) => prev + 1);
+      dispatch(getVideoComments({ videoId, page: page + 1 }));
+      setPage((prev) => prev + 1);
     }
-}, [page, loading, hasNextPage, dispatch, videoId]);
+  }, [page, loading, hasNextPage, dispatch, videoId]);
 
   return (
     <>
@@ -62,29 +63,25 @@ function VideoDetail() {
       </div>
       {/* <TwiteAndComment /> */}
       <Comment comment={true} videoId={video?._id} />
-      <InfiniteScroll 
-      fetchMore={fetchMoreComments}
-      hasNextPage={hasNextPage}
-      >
+      <InfiniteScroll fetchMore={fetchMoreComments} hasNextPage={hasNextPage}>
         <div className="w-full sm:max-w-4xl">
-        {comments?.map((comment) => (
-                        <CommentList
-                            key={comment?._id}
-                            avatar={comment?.owner?.avatar?.url}
-                            commentId={comment?._id}
-                            content={comment?.content}
-                            createdAt={comment?.createdAt}
-                            fullName={comment?.owner?.fullName}
-                            isLiked={comment?.isLiked}
-                            likesCount={comment?.likesCount}
-                            username={comment?.owner?.username}
-                        />
-                    ))}
-                    {/* {loading && (
-                        <div className="w-full flex justify-center items-center">
-                            <Spinner width={10} />
-                        </div>
-                    )} */}
+          {comments?.map((comment, index) => (
+            <CommentList
+              key={index}
+              avatar={comment?.owner?.avatar?.url}
+              commentId={comment?._id}
+              content={comment?.content}
+              createdAt={comment?.createdAt}
+              isLiked={comment?.isLiked}
+              likesCount={comment?.likesCount}
+              username={comment?.owner?.username}
+            />
+          ))}
+          {loading && (
+            <div className="w-full flex justify-center items-center">
+              <Loader width={10} />
+            </div>
+          )}
         </div>
       </InfiniteScroll>
     </>
