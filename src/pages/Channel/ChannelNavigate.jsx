@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function ChannelNavigate({ username, edit }) {
+  const userProfile = useSelector((state) => state.user?.profileData?._id);
+  const user = useSelector((state) => state.auth?.userData?._id);
+
   if (edit) {
     return (
       <>
@@ -63,16 +67,18 @@ function ChannelNavigate({ username, edit }) {
         >
           <p className="p-2">Tweets</p>
         </NavLink> */}
-        <NavLink
-          to={`/channel/${username}/subscribed`}
-          className={({ isActive }) =>
-            isActive
-              ? "bg-white text-purple-600 border-b-2 border-purple-600"
-              : ""
-          }
-        >
-          <p className="p-2">Subscribed</p>
-        </NavLink>
+        {user == userProfile && (
+          <NavLink
+            to={`/channel/${username}/subscribed`}
+            className={({ isActive }) =>
+              isActive
+                ? "bg-white text-purple-600 border-b-2 border-purple-600"
+                : ""
+            }
+          >
+            <p className="p-2">Subscribed</p>
+          </NavLink>
+        )}
       </section>
     </>
   );

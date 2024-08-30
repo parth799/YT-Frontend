@@ -14,6 +14,8 @@ import Channel from "./pages/Channel/Channel";
 import ChannelVideos from "./pages/Channel/ChannelVideos";
 import ChannelPlaylist from "./pages/Channel/ChannelPlaylist";
 import ChannelSubscribers from "./pages/Channel/ChannelSubscribers";
+import EditChannel from "./components/user/EditChannel";
+import EditProfileData from "./components/user/EditProfileData";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +32,6 @@ function App() {
             path=""
             element={
               <AuthLayout authentication={false}>
-                {" "}
                 <Home />
               </AuthLayout>
             }
@@ -88,6 +89,51 @@ function App() {
               element={
                 <AuthLayout authentication={false}>
                   <ChannelSubscribers />
+                </AuthLayout>
+              }
+            />
+          </Route>
+          <Route
+            path="/history"
+            element={
+              <AuthLayout authentication>{/* <History /> */}</AuthLayout>
+            }
+          />
+          <Route
+            path="/liked-videos"
+            element={
+              <AuthLayout authentication>{/* <LikedVideos /> */}</AuthLayout>
+            }
+          />
+          <Route
+            path="/subscriptions"
+            element={
+              <AuthLayout authentication>
+                {/* <MySubscriptions /> */}
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/edit"
+            element={
+              <AuthLayout authentication>
+                <EditChannel />
+                </AuthLayout>
+            }
+          >
+            <Route
+              path="personalInfo"
+              element={
+                <AuthLayout authentication>
+                  <EditProfileData />
+                </AuthLayout>
+              }
+            />
+            <Route
+              path="password"
+              element={
+                <AuthLayout authentication>
+                  {/* <ChangePassword /> */}
                 </AuthLayout>
               }
             />

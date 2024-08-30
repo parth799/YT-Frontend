@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 function Avatar({ src, channelName }) {
     const navigate = useNavigate();
-
+    
     const handleAvatarClick = (e) => {
-        e.stopPropagation()
+      e.preventDefault()
+      console.log(">>>>", channelName);
         navigate(`/channel/${channelName}`);
     };
   return (

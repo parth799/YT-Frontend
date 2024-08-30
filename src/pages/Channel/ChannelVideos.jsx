@@ -36,7 +36,6 @@ function ChannelVideos() {
     };
   return (
     <>
-            {/* For sorting latest, popular and oldest videos */}
             <div className="w-full p-2 text-white flex gap-4">
                 <button
                     onClick={() => {
@@ -78,7 +77,6 @@ function ChannelVideos() {
                     Oldest
                 </button>
             </div>
-            {/* Video listing */}
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 text-white">
                 {videos?.map((video) => (
                     <VideoList

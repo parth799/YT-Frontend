@@ -103,10 +103,10 @@ function ChannelPlaylist() {
                     </div>
                 )}
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 p-2 gap-5 grid-cols-1 w-full mt-5">
-                    {playlists?.map((playlist) => (
+                    {playlists?.map((playlist, index) => (
                         <Link
                             to={`/playlist/${playlist._id}`}
-                            key={playlist.id}
+                            key={index}
                             className="relative h-[15rem] w-full border border-slate-500"
                         >
                             <div className="absolute flex justify-between bottom-0 left-0 border-t py-1 px-2 w-full backdrop-contrast-75">

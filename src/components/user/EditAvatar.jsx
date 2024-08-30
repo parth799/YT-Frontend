@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { updateAvatar, updateCoverImg } from '../../store/Slice/authSlice';
+import { getCurrentUser, updateAvatar, updateCoverImg } from '../../store/Slice/authSlice';
 import { MdClose, MdOutlineCloudUpload } from 'react-icons/md';
 import GetImagePreview from '../components/GetImagePreview';
 
@@ -27,6 +27,7 @@ function EditAvatar({ cover, preImage }) {
                 dispatch(updateAvatar(formData));
             }
         }
+        // dispatch(getCurrentUser())
     };
   return (
     <>
