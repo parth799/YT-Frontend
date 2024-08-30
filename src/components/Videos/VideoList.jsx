@@ -15,7 +15,7 @@ function VideoList({
   const navigate = useNavigate();
   const handleAvatarClick = (e) => {
     e.stopPropagation();
-    // navigate(`/channel/${channelName}`);
+    navigate(`/channel/${channelName}`);
     console.log("click on avatar images");
   };
   return (

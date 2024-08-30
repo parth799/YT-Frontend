@@ -44,7 +44,6 @@ export const deleteAComment = createAsyncThunk("deleteAComment", async (commentI
 });
 
 export const getVideoComments = createAsyncThunk('getVideoComments', async ({ videoId, page, limit }) => {
-  console.log(">>", videoId);
   
     const url = new URL(`${BASE_URL}/comment/${videoId}`);
     if (page) url.searchParams.set("page", page);
@@ -52,7 +51,6 @@ export const getVideoComments = createAsyncThunk('getVideoComments', async ({ vi
 
     try {
         const response = await axiosIN.get(url);
-        console.log("<<<<<<<<",response.data.data);
         
         return response.data.data;
     } catch (error) {
@@ -117,7 +115,6 @@ const commentSlice = createSlice({
             state.comments = Array.from(existingCommentsMap.values()).sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
             );
-            console.log("object",state.comments )
             state.totalComments = action.payload.totalDocs;
             state.hasNextPage = action.payload.hasNextPage;
         });

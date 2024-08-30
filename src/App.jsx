@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import AuthLayout from "./components/components/AuthLayout";
 import VideoDetail from "./components/Videos/VideoDetail";
+import Channel from "./pages/Channel/Channel";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function App() {
                         path="/channel/:username"
                         element={
                             <AuthLayout authentication>
-                                {/* <Channel /> */}
+                                <Channel />
                             </AuthLayout>
                         }
                     ></Route>
