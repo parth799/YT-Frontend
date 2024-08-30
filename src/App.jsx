@@ -16,6 +16,7 @@ import ChannelPlaylist from "./pages/Channel/ChannelPlaylist";
 import ChannelSubscribers from "./pages/Channel/ChannelSubscribers";
 import EditChannel from "./components/user/EditChannel";
 import EditProfileData from "./components/user/EditProfileData";
+import ChangePassword from "./components/user/ChangePassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -133,7 +134,7 @@ function App() {
               path="password"
               element={
                 <AuthLayout authentication>
-                  {/* <ChangePassword /> */}
+                  <ChangePassword />
                 </AuthLayout>
               }
             />

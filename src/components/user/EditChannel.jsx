@@ -12,10 +12,10 @@ function EditChannel() {
   return (
     <>
             {loading && (
-                <div className="fixed top-5 right-5 flex items-center z-20 bg-black border border-slate-600 p-3 rounded shadow-lg">
+                <div className="fixed top-20 right-5 flex items-center z-20 bg-black border border-slate-600 p-3 rounded shadow-lg">
                     <Loader width={8} />
                     <span className="text-md font-bold text-white ml-2">
-                        Loading...
+                        Uploading...
                     </span>
                 </div>
             )}
@@ -34,7 +34,7 @@ function EditChannel() {
                 />
             )}
             <ChannelNavigate edit={true} />
-            <div className="overflow-y-scroll h-[32rem] sm:h-96 mb-20 sm:mb-0">
+            <div className="overflow-y-scroll h-[32rem] sm:h-100 mb-20 sm:mb-0">
                 <Outlet />
             </div>
         </>

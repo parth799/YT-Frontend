@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { getCurrentUser, updateAvatar, updateCoverImg } from '../../store/Slice/authSlice';
+import { updateAvatar, updateCoverImg } from '../../store/Slice/authSlice';
 import { MdClose, MdOutlineCloudUpload } from 'react-icons/md';
 import GetImagePreview from '../components/GetImagePreview';
 
