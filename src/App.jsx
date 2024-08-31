@@ -18,6 +18,8 @@ import EditChannel from "./components/user/EditChannel";
 import EditProfileData from "./components/user/EditProfileData";
 import ChangePassword from "./components/user/ChangePassword";
 import LikedVideos from "./pages/LikedVideos";
+import History from "./pages/History";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,16 +98,18 @@ function App() {
             />
           </Route>
           <Route
-            path="/history"
-            element={
-              <AuthLayout authentication>{/* <History /> */}</AuthLayout>
-            }
-          />
-          <Route
             path="/liked-videos"
             element={
               <AuthLayout authentication>
                 <LikedVideos />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <AuthLayout authentication>
+                <History />
                 </AuthLayout>
             }
           />
@@ -122,7 +126,7 @@ function App() {
             element={
               <AuthLayout authentication>
                 <EditChannel />
-                </AuthLayout>
+              </AuthLayout>
             }
           >
             <Route
@@ -168,21 +172,21 @@ function App() {
           }
         />
         <Route
-                    path="/collections"
-                    element={
-                        <AuthLayout authentication>
-                            {/* <AdminDashboard /> */}
-                        </AuthLayout>
-                    }
-                />
-                <Route
-                    path="/terms&conditions"
-                    element={
-                        <AuthLayout authentication>
-                            {/* <TermsAndConditions /> */}
-                        </AuthLayout>
-                    }
-                />
+          path="/collections"
+          element={
+            <AuthLayout authentication>
+              <AdminDashboard />
+              </AuthLayout>
+          }
+        />
+        <Route
+          path="/terms&conditions"
+          element={
+            <AuthLayout authentication>
+              {/* <TermsAndConditions /> */}
+            </AuthLayout>
+          }
+        />
       </Routes>
     </>
   );

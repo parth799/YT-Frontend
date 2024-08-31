@@ -17,19 +17,20 @@ function VideoList({
     e.stopPropagation();
     navigate(`/channel/${channelName}`);
   };
+  console.log(">>>>",formatDuration(duration));
+  
   return (
     <div
       className="w-full sm:p-2 cursor-pointer"
       onClick={() => navigate(`/watch/${videoId}`)}
     >
       <div className="relative sm:h-60 h-48">
-        {/* Apply border-radius to the thumbnail */}
         <img
           src={thumbnail}
           className="object-cover w-full h-full rounded-lg"
           alt={title}
         />
-        <span className="absolute bottom-2 right-2 rounded-lg text-sm bg-black py-1 px-2">
+        <span className="absolute bottom-2 right-2 rounded-lg text-sm text-white bg-black py-1 px-2">
           {formatDuration(duration)}
         </span>
       </div>
