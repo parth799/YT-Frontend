@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+ 
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Headers/Navbar";
 import Video from "./Video";

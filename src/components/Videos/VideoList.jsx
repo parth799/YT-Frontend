@@ -12,12 +12,13 @@ function VideoList({
   createdAt,
   videoId,
 }) {
+  console.log("<<<  ",views);
+  
   const navigate = useNavigate();
   const handleAvatarClick = (e) => {
     e.stopPropagation();
     navigate(`/channel/${channelName}`);
   };
-  console.log(">>>>",formatDuration(duration));
   
   return (
     <div

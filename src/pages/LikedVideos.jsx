@@ -41,7 +41,7 @@ function LikedVideos() {
               title={video.likedVideo.title}
               thumbnail={video.likedVideo.thumbnail?.url}
               createdAt={video.likedVideo.createdAt}
-              views={video.likedVideo.views}
+              views={video?.likedVideo?.views}
               channelName={video.likedVideo.ownerDetails?.username}
               videoId={video.likedVideo._id}
             />
