@@ -17,6 +17,7 @@ import ChannelSubscribers from "./pages/Channel/ChannelSubscribers";
 import EditChannel from "./components/user/EditChannel";
 import EditProfileData from "./components/user/EditProfileData";
 import ChangePassword from "./components/user/ChangePassword";
+import LikedVideos from "./pages/LikedVideos";
 
 function App() {
   const dispatch = useDispatch();
@@ -103,7 +104,9 @@ function App() {
           <Route
             path="/liked-videos"
             element={
-              <AuthLayout authentication>{/* <LikedVideos /> */}</AuthLayout>
+              <AuthLayout authentication>
+                <LikedVideos />
+                </AuthLayout>
             }
           />
           <Route
@@ -164,6 +167,22 @@ function App() {
             </AuthLayout>
           }
         />
+        <Route
+                    path="/collections"
+                    element={
+                        <AuthLayout authentication>
+                            {/* <AdminDashboard /> */}
+                        </AuthLayout>
+                    }
+                />
+                <Route
+                    path="/terms&conditions"
+                    element={
+                        <AuthLayout authentication>
+                            {/* <TermsAndConditions /> */}
+                        </AuthLayout>
+                    }
+                />
       </Routes>
     </>
   );

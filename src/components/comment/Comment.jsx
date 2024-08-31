@@ -23,7 +23,7 @@ function Comment({ tweet, comment, videoId }) {
     <>
       <form
         onSubmit={handleSubmit(sendContent)}
-        className="sm:p-5 p-3 sm:max-w-4xl w-full relative"
+        className="sm:p-5 p-3 ml-5 sm:max-w-4xl w-full relative"
       >
         <textarea
           placeholder={`${tweet ? "Write a tweet" : "Add a comment"}`}

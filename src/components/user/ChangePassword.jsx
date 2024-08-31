@@ -26,19 +26,15 @@ function ChangePassword() {
             ).unwrap();
 
             if (result?.success) {
-                // Reset fields on success
                 resetField("oldPassword");
                 resetField("newPassword");
                 resetField("confirmPassword");
-                // You can add a success message or redirect the user
             } else {
-                // Handle errors from the server
                 setError("oldPassword", { type: "manual", message: result?.message || "Password change failed" });
             }
         } catch (error) {
             setError("oldPassword", { type: "manual", message: "An error occurred while changing the password" });
             console.log(error.message);
-            
         }
     };
 

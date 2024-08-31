@@ -9,7 +9,7 @@ function Video({src, poster}) {
                 autoPlay
                 controls
                 playsInline
-                className="sm:h-[68vh] sm:max-w-4xl h-64 w-full ml-4 object-contain"
+                className="sm:h-[68vh] sm:max-w-4xl h-80 w-full ml-7 object-contain"
             ></video>
         </>
     );
