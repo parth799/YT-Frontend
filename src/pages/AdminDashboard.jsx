@@ -5,6 +5,12 @@ import UploadVideo from '../components/Videos/UploadVideo'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAVideo } from '../store/Slice/videoSlice';
 import { getChannelStats, getChannelVideos } from '../store/Slice/dashboard';
+import EditVideo from '../components/Videos/EditVideo';
+import Loader from '../components/components/Loader';
+import DeleteConfirmation from '../components/components/DeleteConfirmation';
+import HeaderSection from '../components/dashboard/HeaderSection';
+import StatsSection from '../components/dashboard/StatsSection';
+import VideoTable from '../components/dashboard/VideoTable';
 
 function AdminDashboard() {
     const username = useSelector((state) => state.auth.userData?.username);
@@ -13,6 +19,7 @@ function AdminDashboard() {
     const uploaded = useSelector((state) => state.video.uploaded);
     const publishToggled = useSelector((state) => state.video.publishToggled);
     const deleting = useSelector((state) => state.video.loading);
+    console.log(dashboard);
 
     const dispatch = useDispatch();
     const [videoDetails, setVideoDetails] = useState(null);
@@ -57,8 +64,6 @@ function AdminDashboard() {
                             />
                         </div>
                     )}
-
-                    {/* deleteVideoPopup */}
                     {popUp.deleteVideo && (
                         <div className="w-full fixed top-52 flex justify-center z-20">
                             <DeleteConfirmation
@@ -77,24 +82,18 @@ function AdminDashboard() {
                     {deleting && (
                         <div className="w-full fixed top-20 flex justify-center z-20">
                             <div className="w-52 border border-slate-600 bg-black flex gap-2 p-3">
-                                <Spinner />
+                                <Loader />
                                 <span className="text-md font-bold">
                                     Deleting video...
                                 </span>
                             </div>
                         </div>
                     )}
-
-                    {/* Dashboard Header */}
                     <HeaderSection
                         username={username}
                         setPopUp={setPopUp}
                     />
-
-                    {/* channel stats section */}
                     <StatsSection dashboard={dashboard} />
-
-                    {/* Table for managing channel videos */}
                     <VideoTable
                         videos={videos}
                         setPopUp={setPopUp}

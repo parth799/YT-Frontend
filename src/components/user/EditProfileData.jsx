@@ -14,7 +14,6 @@ function EditProfileData() {
     } = useForm();
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth?.userData);
-    console.log("auth>>>", auth);
     
     useEffect(() => {
         setValue("fullName", auth?.fullName);
@@ -22,7 +21,6 @@ function EditProfileData() {
     }, [auth, setValue]);
 
     const saveChanges = (data) => {
-        console.log("MNMNNMNM",data);
         dispatch(updateUserDetails(data));
         dispatch(getCurrentUser())
     };
