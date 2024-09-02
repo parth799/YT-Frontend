@@ -21,7 +21,7 @@ function ChannelPlaylist() {
     const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false);
     useEffect(() => {
         if (authId) {
-            dispatch(getPlaylistsByUser(authId));
+            dispatch(getPlaylistsByUser(userId));
         }
     }, [dispatch, userId]);
 

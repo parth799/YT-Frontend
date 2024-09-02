@@ -22,11 +22,15 @@ function PlaylistVideos() {
   const navigate = useNavigate();
   const playlist = useSelector((state) => state.playlist.playlist);
   const username = useSelector((state) => state.auth?.userData?.username);
+  const userId = useSelector((state) => state.auth?.userData?._id);
+  const authId = useSelector((state) => state.auth.userData?._id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
   const [showRemoveVideoForm, setShowRemoveVideoForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  console.log(userId, authId);
+  
   useEffect(() => {
     dispatch(getPlaylistById(playlistId));
   }, [dispatch, playlistId]);
@@ -88,13 +92,13 @@ function PlaylistVideos() {
 
   return (
     <div className="playlist-container p-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 pb-4 border-b-2">
         <h2 className="playlist-title text-2xl font-bold text-white">
           {playlist?.name}
         </h2>
         <div className="relative">
           <HiOutlineDotsVertical
-            className="text-white cursor-pointer"
+            className="text-white cursor-pointer text-[25px]"
             onClick={toggleDropdown}
           />
           {dropdownOpen && (
@@ -104,7 +108,7 @@ function PlaylistVideos() {
                   className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
                   onClick={handleUpdateClick}
                 >
-                  Update Playlist
+                  Update Plalist
                 </li>
                 <li
                   className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
@@ -129,7 +133,7 @@ function PlaylistVideos() {
           )}
         </div>
       </div>
-      <p className="playlist-description text-slate-400 mb-4">
+      <p className="text-xs bg-[#222222] rounded-lg p-2 outline-none text-slate-400 mb-4">
         {playlist?.description}
       </p>
       <div className="videos-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -154,11 +158,12 @@ function PlaylistVideos() {
               className="w-full space-y-5"
             >
               <h2 className="text-2xl font-bold text-white">Update Playlist</h2>
-              <IoCloseCircleOutline
+
+              {(<IoCloseCircleOutline
                 size={30}
                 className="absolute -top-2 right-4 cursor-pointer text-white"
                 onClick={() => setShowUpdateForm(false)}
-              />
+              />)}
               <Input
                 label="Name: "
                 placeholder="Enter playlist name"
