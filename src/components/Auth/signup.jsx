@@ -21,8 +21,6 @@ function Signup() {
 
   const submit = async(data) => {
     const response = await dispatch(createAccount(data));
-    console.log(response);
-    
     if (response?.payload?.success) {
       const username = data?.username;
       const password = data?.password;
@@ -31,12 +29,10 @@ function Signup() {
       if (loginResult?.type === "login/fulfilled") {
         navigate("/login");
       } else {
-        console.log("move to terms ======");
         // navigate("/terms&conditions");
       }
     }
     // const response = await
-    console.log(data);
   };
 
   if (loading) {

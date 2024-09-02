@@ -8,7 +8,7 @@ const initialState = {
     playlists: [],
 };
 
-export const createAPlaylist = createAsyncThunk('createAPlaylist', async({name, description}) => {
+export const createAPlaylist = createAsyncThunk('createAPlaylist', async ({ name, description }) => {
     try {
         const response = await axiosIN.post("/playlist", {
             name,
@@ -24,9 +24,9 @@ export const createAPlaylist = createAsyncThunk('createAPlaylist', async({name, 
     }
 })
 
-export const addVideoToPlayList = createAsyncThunk('addVideoToPlayList', async (videoId,playlistId) => {
+export const addVideoToPlayList = createAsyncThunk('addVideoToPlayList', async ({videoId, playlistId}) => {
     try {
-        const response = await axiosIN.post(`/playlist/add/${videoId}/${playlistId}`);
+        const response = await axiosIN.patch(`/playlist/add/${videoId}/${playlistId}`);
         if (response.data?.success) {
             toast.success(response.data.message);
         }
@@ -39,7 +39,7 @@ export const addVideoToPlayList = createAsyncThunk('addVideoToPlayList', async (
 
 export const removeVideoFromPlaylist = createAsyncThunk('removeVideoFromPlaylist', async (videoId, playlistId) => {
     try {
-        const response = await axiosIN.post(`/playlist/remove/${videoId}/${playlistId}`);
+        const response = await axiosIN.patch(`/playlist/remove/${videoId}/${playlistId}`);
         if (response.data?.success) {
             toast.success(response.data.message);
         }
@@ -55,7 +55,7 @@ export const getPlaylistById = createAsyncThunk(
     "getPlaylistById",
     async (playlistId) => {
         try {
-            const response = await axiosIN.get(`/playlist/${playlistId}`);
+            const response = await axiosIN.get(`/playlist/${playlistId}`);            
             return response.data.data;
         } catch (error) {
             toast.error(error?.response?.data?.error);
@@ -106,6 +106,27 @@ const playlistSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getPlaylistsByUser.fulfilled, (state, action) => {
             state.playlists = action.payload;
+        });
+        builder.addCase(getPlaylistById.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(getPlaylistById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.playlist = action.payload;
+        })
+        builder.addCase(getPlaylistById.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(addVideoToPlayList.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(addVideoToPlayList.fulfilled, (state, action) => {
+            state.loading = false;
+            state.playlist = action.payload;
+        })
+        builder.addCase(addVideoToPlayList.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
         });
     },
 });

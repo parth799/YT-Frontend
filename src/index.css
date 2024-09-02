@@ -23,3 +23,34 @@ html {
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
 }
+
+
+
+/* AddVideoInPlaylist.css */
+
+/* Hide scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Position checkbox below the video */
+.checkbox-position {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Remove button hover effects */
+button:hover {
+    background-color: inherit;
+}
+
+/* Ensure the buttons have no hover effects */
+button {
+    transition: none !important;
+}

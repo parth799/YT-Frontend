@@ -21,6 +21,8 @@ import LikedVideos from "./pages/LikedVideos";
 import History from "./pages/History";
 import AdminDashboard from "./pages/AdminDashboard";
 import MySubscriptions from "./pages/MySubscriptions";
+import SearchVideos from "./pages/SearchVideos";
+import PlaylistVideos from "./components/playlist/PlaylistVideos";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,15 +47,16 @@ function App() {
             path="/search/:query"
             element={
               <AuthLayout authentication={false}>
-                {/* <PlaylistVideos /> */}
+                <SearchVideos /> 
               </AuthLayout>
             }
-          />
+            />
           <Route
             path="/playlist/:playlistId"
             element={
               <AuthLayout authentication={false}>
-                {/* <SearchVideos /> */}
+                +
+                <PlaylistVideos />
               </AuthLayout>
             }
           />

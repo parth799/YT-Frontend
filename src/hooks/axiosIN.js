@@ -8,5 +8,4 @@ axiosIN.defaults.baseURL = BASE_URL;
 // axiosIN.defaults.withCredentials = true;
 axiosIN.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-
 export default axiosIN;
