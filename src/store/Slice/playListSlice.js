@@ -37,7 +37,7 @@ export const addVideoToPlayList = createAsyncThunk('addVideoToPlayList', async (
     }
 })
 
-export const removeVideoFromPlaylist = createAsyncThunk('removeVideoFromPlaylist', async (videoId, playlistId) => {
+export const removeVideoFromPlaylist = createAsyncThunk('removeVideoFromPlaylist', async ({videoId, playlistId}) => {
     try {
         const response = await axiosIN.patch(`/playlist/remove/${videoId}/${playlistId}`);
         if (response.data?.success) {
@@ -72,6 +72,7 @@ export const getPlaylistsByUser = createAsyncThunk(
                 `/playlist/user/${userId}`
             );
             return response.data.data;
+            
         } catch (error) {
             toast.error(error?.response?.data?.error);
             throw error;
@@ -98,6 +99,20 @@ export const upadtePlaylist = createAsyncThunk(
     }
 );
 
+export const deletePlaylist = createAsyncThunk(
+    "deletePlaylist",
+    async (playlistId) => {
+        try {
+            const response = await axiosIN.delete(`/playlist/${playlistId}`);
+            if (response.data.success) {
+                toast.success(response.data.message);
+            }
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    })
 
 const playlistSlice = createSlice({
     name: "playlist",
@@ -128,6 +143,8 @@ const playlistSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         });
+
+
     },
 });
 

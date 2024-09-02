@@ -100,7 +100,7 @@ function VideoDetail() {
             </div>
           </InfiniteScroll>
         </div>
-        <div className="lg:w-1/3 w-full max-h-screen overflow-y-auto">
+        <div className="lg:w-1/3 w-full max-h-[250vh] overflow-y-auto">
           <div className="text-white mb-4">Up Next</div>
           <div className="space-y-4">
             {videos

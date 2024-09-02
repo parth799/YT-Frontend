@@ -18,7 +18,6 @@ function SearchVideos() {
     useEffect(() => {
         const sortType = searchParams.get("sortType");
         const sortBy = searchParams.get("sortBy");
-        console.log(sortType, sortBy);
         
         dispatch(
             getAllVideos({

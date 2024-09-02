@@ -19,16 +19,16 @@ function ChannelPlaylist() {
         formState: { errors },
     } = useForm();
     const [openCreatePlaylist, setOpenCreatePlaylist] = useState(false);
-
     useEffect(() => {
-        if (userId) {
-            dispatch(getPlaylistsByUser(userId));
+        if (authId) {
+            dispatch(getPlaylistsByUser(authId));
         }
     }, [dispatch, userId]);
 
     const createPlaylist = (data) => {
         dispatch(createAPlaylist(data));
         setOpenCreatePlaylist((prev) => !prev);
+        dispatch(getPlaylistsByUser(authId))
     };
     return (
         <>
@@ -109,6 +109,14 @@ function ChannelPlaylist() {
                             key={index}
                             className="relative h-[15rem] w-full border border-slate-500"
                         >
+                            <div className=" py-1 px-2">
+                                <p className="text-sm font-bold">
+                                    {playlist.name}
+                                </p>
+                                <p className="text-xs w-full h-4 overflow-hidden">
+                                    {playlist.description}
+                                </p>
+                            </div>
                             <div className="absolute flex justify-between bottom-0 left-0 border-t py-1 px-2 w-full backdrop-contrast-75">
                                 <div className="flex flex-col gap-1">
                                     <h1 className="text-lg">Playlist</h1>
@@ -119,14 +127,7 @@ function ChannelPlaylist() {
                                 </div>
                                 <p>{playlist.totalVideos} Videos</p>
                             </div>
-                            <div className=" py-1 px-2">
-                                <p className="text-sm font-bold">
-                                    {playlist.name}
-                                </p>
-                                <p className="text-xs w-full h-4 overflow-hidden">
-                                    {playlist.description}
-                                </p>
-                            </div>
+                            
                         </Link>
                     ))}
                 </div>
