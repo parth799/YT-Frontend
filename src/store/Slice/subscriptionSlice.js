@@ -32,8 +32,10 @@ export const getUserChannelSubscribers = createAsyncThunk('getUserChannelSubscri
 
 export const getSubscribedChannels = createAsyncThunk('getSubscribedChannels', async (subscriberId) => {
     try {
+        if (subscriberId !== undefined) {
         const response = await axiosIN.get(`/subscriptions/u/${subscriberId}`);
         return response.data.data;
+        }
     } catch (error) {
         toast.error(error?.response?.data?.error);
         throw error;
@@ -73,6 +75,7 @@ const subscriptionSlice = createSlice({
             state.mySubscriptions = action.payload.filter(
                 (subscription) => subscription?.subscribedChannel?.latestVideo
             );
+            
         });
     }
 })

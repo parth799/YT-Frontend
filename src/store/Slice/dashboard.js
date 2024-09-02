@@ -12,7 +12,6 @@ const initialState = {
 export const getChannelStats = createAsyncThunk('getChannelStats', async () => {
     try {
         const response = await axiosIN.get('/dashboard/status');
-        console.log(response.data.data);
         return response.data.data;
     } catch (error) {
         toast.error(error?.response?.data?.error)

@@ -1,4 +1,3 @@
- 
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Headers/Navbar";
 import Video from "./Video";
@@ -104,19 +103,21 @@ function VideoDetail() {
         <div className="lg:w-1/3 w-full max-h-screen overflow-y-auto">
           <div className="text-white mb-4">Up Next</div>
           <div className="space-y-4">
-            {videos?.map((video) => (
-              <VideoList
-                key={video._id}
-                avatar={video.ownerDetails?.avatar?.url}
-                duration={video.duration}
-                title={video.title}
-                thumbnail={video.thumbnail?.url}
-                createdAt={video.createdAt}
-                views={video.views}
-                channelName={video.ownerDetails.username}
-                videoId={video._id}
-              />
-            ))}
+            {videos
+              ?.filter((video) => video._id !== videoId)
+              .map((video) => (
+                <VideoList
+                  key={video._id}
+                  videoId={video._id}
+                  avatar={video.ownerDetails?.avatar?.url}
+                  duration={video.duration}
+                  title={video.title}
+                  thumbnail={video.thumbnail?.url}
+                  createdAt={video.createdAt}
+                  views={video.views}
+                  channelName={video.ownerDetails.username}
+                />
+              ))}
           </div>
         </div>
       </div>

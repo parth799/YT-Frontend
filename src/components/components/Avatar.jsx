@@ -6,7 +6,6 @@ function Avatar({ src, channelName }) {
     
     const handleAvatarClick = (e) => {
       e.preventDefault()
-      console.log(">>>>", channelName);
         navigate(`/channel/${channelName}`);
     };
   return (

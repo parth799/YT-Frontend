@@ -32,7 +32,6 @@ function Description({
     dispatch(toggleSubscription(channelId));
     setLocalIsSubscribed((prev) => !prev);
     setLocalSubscribersCount((prev) => prev + (localIsSubscribed ? -1 : 1));
-    console.log("Clicked on subscribe");
   };
 
   return (

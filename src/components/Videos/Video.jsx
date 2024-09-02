@@ -15,7 +15,6 @@ function Video({ src, poster, manifestUri }) {
 
       try {
         await player.load(manifestUri);
-        console.log("The video has been loaded successfully!");
       } catch (e) {
         onError(e);
       }

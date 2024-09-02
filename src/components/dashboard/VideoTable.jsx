@@ -13,7 +13,7 @@ function VideoTable({ videos, setPopUp, setVideoDetails }) {
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b border-slate-500">
-                                Toggle Publish
+                                Change status
                             </th>
                             <th className="py-2 px-4 border-b border-slate-500">
                                 Status
@@ -22,10 +22,10 @@ function VideoTable({ videos, setPopUp, setVideoDetails }) {
                                 Uploaded
                             </th>
                             <th className="py-2 px-4 border-b border-slate-500">
-                                Rating
+                                Likes
                             </th>
                             <th className="py-2 px-4 border-b border-slate-500">
-                                Date Uploaded
+                                Date uploaded
                             </th>
                             <th className="py-2 px-4 border-b border-slate-500"></th>
                         </tr>
@@ -41,11 +41,11 @@ function VideoTable({ videos, setPopUp, setVideoDetails }) {
                                 </td>
                                 <td className="py-2 px-4 border-b border-slate-500 ">
                                     {video?.isPublished ? (
-                                        <span className="text-green-500 py-1 px-2 border border-green-500 rounded-full">
+                                        <span className="text-green-500 py-1 px-2  rounded-full">
                                             Published
                                         </span>
                                     ) : (
-                                        <span className="text-orange-500 py-1 px-2 border border-orange-500 rounded-full">
+                                        <span className="text-orange-500 py-1 px-2 rounded-full">
                                             UnPublished
                                         </span>
                                     )}

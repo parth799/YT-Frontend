@@ -20,6 +20,7 @@ import ChangePassword from "./components/user/ChangePassword";
 import LikedVideos from "./pages/LikedVideos";
 import History from "./pages/History";
 import AdminDashboard from "./pages/AdminDashboard";
+import MySubscriptions from "./pages/MySubscriptions";
 
 function App() {
   const dispatch = useDispatch();
@@ -117,7 +118,7 @@ function App() {
             path="/subscriptions"
             element={
               <AuthLayout authentication>
-                {/* <MySubscriptions /> */}
+                <MySubscriptions />
               </AuthLayout>
             }
           />

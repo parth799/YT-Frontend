@@ -11,7 +11,6 @@ function Comment({ tweet, comment, videoId }) {
   const sendContent = (data) => {
     if (data) {
         if (tweet) {
-            console.log("crete tweet");
             // dispatch(createTweet(data))
         } else if (comment) {
             dispatch(createAComment({content:data.content, videoId , dispatch:dispatch}))

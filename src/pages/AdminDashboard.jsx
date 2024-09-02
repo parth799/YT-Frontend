@@ -19,7 +19,6 @@ function AdminDashboard() {
     const uploaded = useSelector((state) => state.video.uploaded);
     const publishToggled = useSelector((state) => state.video.publishToggled);
     const deleting = useSelector((state) => state.video.loading);
-    console.log(dashboard);
 
     const dispatch = useDispatch();
     const [videoDetails, setVideoDetails] = useState(null);

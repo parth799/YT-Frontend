@@ -49,8 +49,8 @@ export const userLogin = createAsyncThunk("login", async (data) => {
 });
 
 export const userLogout = createAsyncThunk("logout", async () => {
-    try {console.log("user", response.data.data.accessToken)
-        const response = await axiosIN.post("/users/logout");
+    try {
+        await axiosIN.post("/users/logout");
         toast.success("Logged out successfully");
         return null;
     } catch (error) {

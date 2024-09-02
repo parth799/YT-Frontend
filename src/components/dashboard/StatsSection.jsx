@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { FaRegEye, FaRegHeart } from 'react-icons/fa';
+import { FaRegEye } from 'react-icons/fa';
 import { MdOutlineSlowMotionVideo } from 'react-icons/md';
 import { RxAvatar } from 'react-icons/rx';
 import { AiOutlineLike } from "react-icons/ai";
