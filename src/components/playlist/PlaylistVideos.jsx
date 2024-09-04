@@ -22,14 +22,13 @@ function PlaylistVideos() {
   const navigate = useNavigate();
   const playlist = useSelector((state) => state.playlist.playlist);
   const username = useSelector((state) => state.auth?.userData?.username);
-  const userId = useSelector((state) => state.auth?.userData?._id);
+  const userId = useSelector((state) => state.user?.profileData?._id);
   const authId = useSelector((state) => state.auth.userData?._id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
   const [showRemoveVideoForm, setShowRemoveVideoForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  console.log(userId, authId);
   
   useEffect(() => {
     dispatch(getPlaylistById(playlistId));
@@ -97,10 +96,10 @@ function PlaylistVideos() {
           {playlist?.name}
         </h2>
         <div className="relative">
-          <HiOutlineDotsVertical
+          {userId === authId &&  (<HiOutlineDotsVertical
             className="text-white cursor-pointer text-[25px]"
             onClick={toggleDropdown}
-          />
+          />)}
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded shadow-lg z-10">
               <ul className="py-1">

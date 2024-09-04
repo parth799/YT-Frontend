@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
     html {
         font-family: 'Hedvig Letters Sans', sans-serif;
         font-family: 'Space Grotesk', sans-serif;
     }
-} */
+}
 
 html {
     overflow: scroll;
@@ -46,11 +46,5 @@ html {
 }
 
 /* Remove button hover effects */
-button:hover {
-    background-color: inherit;
-}
 
-/* Ensure the buttons have no hover effects */
-button {
-    transition: none !important;
-}
+

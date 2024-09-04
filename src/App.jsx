@@ -61,6 +61,14 @@ function App() {
             }
           />
           <Route
+          path="/collections"
+          element={
+            <AuthLayout authentication>
+              <AdminDashboard />
+              </AuthLayout>
+          }
+        />
+          <Route
             path="/channel/:username"
             element={
               <AuthLayout authentication>
@@ -175,14 +183,7 @@ function App() {
             </AuthLayout>
           }
         />
-        <Route
-          path="/collections"
-          element={
-            <AuthLayout authentication>
-              <AdminDashboard />
-              </AuthLayout>
-          }
-        />
+        
         <Route
           path="/terms&conditions"
           element={

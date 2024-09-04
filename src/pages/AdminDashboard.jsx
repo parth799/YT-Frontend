@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Headers/Navbar'
 import UploadVideo from '../components/Videos/UploadVideo'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAVideo } from '../store/Slice/videoSlice';
@@ -47,7 +46,6 @@ function AdminDashboard() {
     window.scrollTo(0, 0);
   return (
     <>
-    <Navbar />
       <div className="w-full sm:px-2">
       <div className=" w-full relative h-screen text-white space-y-5 z-10 py-4 px-1">
                     {popUp.uploadVideo && (

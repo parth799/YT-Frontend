@@ -1,56 +1,47 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
-import shaka from "shaka-player";
+import { useEffect, useState } from "react";
+import axiosIN from "../../hooks/axiosIN";
 
-function Video({ src, poster, manifestUri }) {
-  const videoRef = useRef(null);
+function Video({ src }) {
+  console.log("src",src);
+  
+  const [videoData, setVideoData] = useState({
+    otp: "",
+    playbackInfo: "",
+  });
 
   useEffect(() => {
-    const initPlayer = async () => {
-      const video = videoRef.current;
-      const player = new shaka.Player(video);
-
-      window.player = player;
-      player.addEventListener("error", onErrorEvent);
-
+    const fetchVideoData = async () => {
       try {
-        await player.load(manifestUri);
-      } catch (e) {
-        onError(e);
+        const response = await axiosIN.post("video/getVdoCipherOTP", {
+          videoId: src, 
+        });
+        console.log("response", response.data);
+        setVideoData(response.data);
+      } catch (error) {
+        console.error("Failed to get VdoCipher OTP", error);
       }
     };
-
-    const onErrorEvent = (event) => {
-      onError(event.detail);
-    };
-
-    const onError = (error) => {
-      console.error("Error code", error.code, "object", error);
-    };
-
-    shaka.polyfill.installAll();
-
-    if (shaka.Player.isBrowserSupported()) {
-      initPlayer();
-    } else {
-      console.error("Browser not supported!");
-    }
-
-    return () => {
-      window.player?.destroy();
-    };
-  }, [manifestUri]);
+    fetchVideoData();
+  }, [src]);
 
   return (
-    <div className="video-container">
-      <video
-        src={src}
-        poster={poster}
-        ref={videoRef}
-        autoPlay
-        controls
-        style={{ width: "100%", height: "auto" }}
-      ></video>
+    <div style={{ position: "relative", paddingTop: "56.25%", overflow: "hidden" }}>
+      {videoData.otp && videoData.playbackInfo && (
+        <iframe
+          src={`https://player.vdocipher.com/v2/?otp=${videoData.otp}&playbackInfo=${videoData.playbackInfo}&player=LJI5RljfS571nEpK`}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            border: 0,
+          }}
+          allowFullScreen
+          allow="encrypted-media"
+        ></iframe>
+      )}
     </div>
   );
 }

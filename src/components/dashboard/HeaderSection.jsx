@@ -6,10 +6,10 @@ function HeaderSection({ username, setPopUp }) {
     <section className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
     <div>
         <h1 className="sm:text-2xl text-xl font-bold">
-            Welcome Back, {username}{" "}
+            Welcome, {username}{" "}
         </h1>
         <p className="text-xs font-light text-slate-400 ">
-            Seamless Video Management, Elevated Results.
+            Video Management
         </p>
     </div>
     <div>

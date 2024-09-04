@@ -11,7 +11,7 @@ function Button({
 }) {
     return (
         <button
-            className={`${className} ${type} ${bgColor} ${textColor} hover:scale-110 duration-100 ease-in`}
+            className={`${className} ${type} ${bgColor} ${textColor}`}
             {...props}
         >
             {children}
