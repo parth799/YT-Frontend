@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAVideo, updateUploadState } from "../../store/Slice/videoSlice";
 import { useEffect } from "react";
-import Loader from "../components/Loader";
+import Loader from "../loader/Loader";
 
 function EditVideo({
     videoId,

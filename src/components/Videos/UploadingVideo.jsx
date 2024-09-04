@@ -5,7 +5,7 @@ import { IoCloseCircleOutline } from 'react-icons/io5'
 import { useDispatch } from 'react-redux';
 import { updateUploadState } from '../../store/Slice/videoSlice';
 import { TiTick } from 'react-icons/ti';
-import Loader from '../components/Loader';
+import Loader from '../loader/Loader';
 
 function UploadingVideo({
     videoFileName,

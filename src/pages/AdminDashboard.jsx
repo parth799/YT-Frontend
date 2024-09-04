@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteAVideo } from '../store/Slice/videoSlice';
 import { getChannelStats, getChannelVideos } from '../store/Slice/dashboard';
 import EditVideo from '../components/Videos/EditVideo';
-import Loader from '../components/components/Loader';
+import Loader from '../components/loader/Loader';
 import DeleteConfirmation from '../components/components/DeleteConfirmation';
 import HeaderSection from '../components/dashboard/HeaderSection';
 import StatsSection from '../components/dashboard/StatsSection';

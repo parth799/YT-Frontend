@@ -16,7 +16,7 @@ import Description from "../components/Description";
 import Comment from "../comment/Comment";
 import InfiniteScroll from "../components/InfiniteScroll";
 import CommentList from "../comment/CommentList";
-import Loader from "../components/Loader";
+import Loader from "../loader/Loader";
 import VideoList from "./VideoList";
 
 function VideoDetail() {
