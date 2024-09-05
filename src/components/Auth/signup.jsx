@@ -33,6 +33,8 @@ function Signup() {
       if (loginResult?.type === "login/fulfilled") {
         navigate("/login");
       }
+    window.location.reload();
+
     }
   };
 
@@ -45,7 +47,7 @@ function Signup() {
 
     const value = {
       email: data.email,
-      username: data.given_name,
+      username: data.given_name.toLowerCase(),
       fullName: data.name,
       avatar: data.picture,
     };
@@ -53,13 +55,14 @@ function Signup() {
 
     try {
       const response = await axiosIN.post(`/users/google`, value);
-      // toast.success("Account created successfully");
       console.log("response", response.data);
       const { user, accessToken } = response.data.data;
       localStorage.setItem("token", accessToken);
       if (response.data.success) {
         navigate("/");
+        toast.success("Account created successfully");
       }
+      window.location.reload();
 
       return user;
     } catch (error) {

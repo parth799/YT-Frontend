@@ -24,20 +24,20 @@ function Login() {
   const submit = async (data) => {
     console.log("data", data);
 
-    const isEmail = data.username.includes("@");
-    const loginData = isEmail
-      ? { email: data.username, password: data.password }
-      : data;
+    
+    const isEmail = data.username.includes("@")
+    const loginData = isEmail ? {email: data.username, password: data.password} :data;
 
-    const response = await dispatch(userLogin(loginData));
+    const response = await dispatch(userLogin(loginData))
     const user = await dispatch(getCurrentUser());
     if (user && response?.payload) {
-      navigate("/");
+      navigate('/')
     }
+    window.location.reload();
   };
 
   if (loading) {
-    return <LoginLayout />;
+    return <LoginLayout/>
   }
 
   const googlelog = async (res) => {
@@ -46,15 +46,14 @@ function Login() {
       const googleData = {
         email: decodedData.email,
       };
-      console.log("decodedData", decodedData);
+      console.log("decodedData",decodedData);
 
-      const response = await dispatch(
-        userLogin({ email: googleData.email, password: googleData.email })
-      );
+      const response = await dispatch(userLogin({ email: googleData.email, password: googleData.email}));
       const user = await dispatch(getCurrentUser());
       if (user && response?.payload) {
         navigate("/");
       }
+      window.location.reload();
     } catch (error) {
       console.error("Google Login Failed:", error);
     }
