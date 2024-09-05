@@ -22,7 +22,7 @@ function MySubscriptions() {
     
     return (
         <>
-            <div className="flex gap-2 p-2 text-white items-center bg-[#222222]">
+            <div className="flex gap-2 p-2 text-white items-center border-b-2 bg-[#222222]">
                 {subscriptions?.map((subscription) => (
                     <div
                         key={subscription?.subscribedChannel?._id}

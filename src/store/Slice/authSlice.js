@@ -95,6 +95,8 @@ export const changePassword = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     // const token = localStorage.getItem("token");
         const response = await axiosIN.get("/users/current-user");
+        console.log(response.data.data);
+        
         return response.data.data;  
 });
 

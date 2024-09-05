@@ -8,7 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, userLogin } from "../../store/Slice/authSlice";
 import LoginLayout from "../loader/LoginLayout";
-import { toast } from "react-toastify";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const {
@@ -21,20 +22,43 @@ function Login() {
   const loading = useSelector((state) => state.auth?.loading);
 
   const submit = async (data) => {
-    const isEmail = data.username.includes("@")
-    const loginData = isEmail ? {email: data.username, password: data.password} :data;
+    console.log("data", data);
 
-    const response = await dispatch(userLogin(loginData))
+    const isEmail = data.username.includes("@");
+    const loginData = isEmail
+      ? { email: data.username, password: data.password }
+      : data;
+
+    const response = await dispatch(userLogin(loginData));
     const user = await dispatch(getCurrentUser());
     if (user && response?.payload) {
-      navigate('/')
+      navigate("/");
     }
-    window.location.reload();
   };
 
   if (loading) {
-    return <LoginLayout/>
+    return <LoginLayout />;
   }
+
+  const googlelog = async (res) => {
+    try {
+      const decodedData = jwtDecode(res.credential);
+      const googleData = {
+        email: decodedData.email,
+      };
+      console.log("decodedData", decodedData);
+
+      const response = await dispatch(
+        userLogin({ email: googleData.email, password: googleData.email })
+      );
+      const user = await dispatch(getCurrentUser());
+      if (user && response?.payload) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Google Login Failed:", error);
+    }
+  };
 
   return (
     <>
@@ -81,6 +105,15 @@ function Login() {
                 SignUp
               </Link>
             </p>
+            <h5 className="text-center pt-4 font-Poppins text-[14px] text-white ">
+              Or join with
+            </h5>
+            <GoogleLogin
+              onSuccess={(res) => {
+                googlelog(res);
+              }}
+              onError={() => console.log("SOME THING WHAT WRONG")}
+            />
           </form>
         </div>
       </div>

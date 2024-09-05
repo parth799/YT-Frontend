@@ -3,11 +3,15 @@ import GetImagePreview from "../components/GetImagePreview";
 import Logo from "../components/Logo";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createAccount, userLogin } from "../../store/Slice/authSlice.js";
 import LoginLayout from "../loader/LoginLayout.jsx";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import axiosIN from "../../hooks/axiosIN.js";
+import { toast } from "react-toastify";
+
 function Signup() {
   const {
     handleSubmit,
@@ -19,7 +23,7 @@ function Signup() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth?.loading);
 
-  const submit = async(data) => {
+  const submit = async (data) => {
     const response = await dispatch(createAccount(data));
     if (response?.payload?.success) {
       const username = data?.username;
@@ -28,16 +32,41 @@ function Signup() {
 
       if (loginResult?.type === "login/fulfilled") {
         navigate("/login");
-      } else {
-        // navigate("/terms&conditions");
       }
     }
-    // const response = await
   };
 
   if (loading) {
-    return <LoginLayout />
+    return <LoginLayout />;
   }
+  const googlelog = async (res) => {
+    const data = jwtDecode(res.credential);
+    console.log("data", data);
+
+    const value = {
+      email: data.email,
+      username: data.given_name,
+      fullName: data.name,
+      avatar: data.picture,
+    };
+    console.log(value);
+
+    try {
+      const response = await axiosIN.post(`/users/google`, value);
+      // toast.success("Account created successfully");
+      console.log("response", response.data);
+      const { user, accessToken } = response.data.data;
+      localStorage.setItem("token", accessToken);
+      if (response.data.success) {
+        navigate("/");
+      }
+
+      return user;
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+      throw error;
+    }
+  };
   return (
     <>
       <div className="w-full h-screen text-white p-3 flex justify-center items-start sm:mt-8">
@@ -72,35 +101,7 @@ function Signup() {
               </div>
             </div>
 
-            {/* <label htmlFor="avatar" className="cursor-pointer">
-              <div className="absolute h-24 w-24 left-2 bottom-2 flex justify-center items-center">
-                <img
-                  src={avatarPreview}
-                  className=" object-cover w-full h-full border-2 border-double rounded-full"
-                />
-                <FaCamera
-                  className="absolute hover:text-purple-500"
-                  size={20}
-                />
-              </div>
-              <Controller
-                name="avatar"
-                control={control}
-                render={({ field: { onChange } }) => (
-                  <input
-                    id="avatar"
-                    type="file"
-                    className="hidden"
-                    accept="image/png, image/jpeg"
-                    onChange={(e) => {
-                      onChange(handleAvatarChange(e));
-                    }}
-                  />
-                )}
-                rules={{ required: "avatar is required" }}
-              />
-            </label> */}
-            {errors.avatat && (
+            {errors.avatar && (
               <div className="text-red-500">{errors.avatar?.message}</div>
             )}
 
@@ -120,7 +121,7 @@ function Signup() {
               type="email"
               placeholder="Enter email"
               {...register("email", {
-                required: "email is required",
+                required: "Email is required",
               })}
               className="h-8"
             />
@@ -132,7 +133,7 @@ function Signup() {
               type="text"
               placeholder="Enter fullname"
               {...register("fullName", {
-                required: "fullName is required",
+                required: "Full name is required",
               })}
               className="h-8"
             />
@@ -144,7 +145,7 @@ function Signup() {
               type="password"
               placeholder="Enter password"
               {...register("password", {
-                required: "password is required",
+                required: "Password is required",
               })}
               className="h-8"
             />
@@ -168,6 +169,15 @@ function Signup() {
                 Login
               </Link>
             </p>
+            <h5 className="text-center pt-4 font-Poppins text-[14px] text-white ">
+              Or join with
+            </h5>
+            <GoogleLogin
+              onSuccess={(res) => {
+                googlelog(res);
+              }}
+              onError={() => console.log("SOME THING WHAT WRONG")}
+            />
           </form>
         </div>
       </div>
