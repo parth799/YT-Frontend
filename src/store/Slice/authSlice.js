@@ -94,10 +94,15 @@ export const changePassword = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     // const token = localStorage.getItem("token");
-        const response = await axiosIN.get("/users/current-user");
-        console.log(response.data.data);
-        
-        return response.data.data;  
+        try {
+            const response = await axiosIN.get("/users/current-user");
+            console.log(response.data.data);
+            
+            return response.data.data; 
+        } catch (error) {
+            toast.error("Pleace Login!")
+            throw error;
+        } 
 });
 
 export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {

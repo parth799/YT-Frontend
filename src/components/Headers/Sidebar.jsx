@@ -73,6 +73,7 @@ function Sidebar() {
   const logout = async () => {
     await dispatch(userLogout());
     navigate("/");
+    localStorage.clear();
   };
 
   return (

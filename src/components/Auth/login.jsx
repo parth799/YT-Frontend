@@ -29,11 +29,11 @@ function Login() {
     const loginData = isEmail ? {email: data.username, password: data.password} :data;
 
     const response = await dispatch(userLogin(loginData))
-    const user = await dispatch(getCurrentUser());
-    if (user && response?.payload) {
+    await dispatch(getCurrentUser());
+    if ( response?.payload) {
       navigate('/')
     }
-    window.location.reload();
+    // window.location.reload();
   };
 
   if (loading) {

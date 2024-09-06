@@ -33,8 +33,7 @@ function Signup() {
       if (loginResult?.type === "login/fulfilled") {
         navigate("/login");
       }
-    window.location.reload();
-
+      window.location.reload();
     }
   };
 

@@ -55,7 +55,6 @@ function App() {
             path="/playlist/:playlistId"
             element={
               <AuthLayout authentication={false}>
-                +
                 <PlaylistVideos />
               </AuthLayout>
             }

@@ -32,7 +32,8 @@ export const getLikedVideos = createAsyncThunk("getLikedVideos", async () => {
         const response = await axiosIN.get("likes/videos");
         return response.data.data;
     } catch (error) {
-        toast.error(error?.response?.data?.error);
+        toast.error("Pleace Login!")
+
         throw error;
     }
 });

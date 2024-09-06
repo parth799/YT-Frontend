@@ -14,7 +14,7 @@ export const getChannelStats = createAsyncThunk('getChannelStats', async () => {
         const response = await axiosIN.get('/dashboard/status');
         return response.data.data;
     } catch (error) {
-        toast.error(error?.response?.data?.error)
+        toast.error("Pleace Login!")
         throw error;
     }
 })
@@ -24,7 +24,7 @@ export const getChannelVideos = createAsyncThunk('getChannelVideos', async () =>
         const response = await axiosIN.get('/dashboard/videos');
         return response.data.data;
     } catch (error) {
-        toast.error(error?.response?.data?.error)
+        toast.error("Pleace Login!")
         throw error;
     }
 })

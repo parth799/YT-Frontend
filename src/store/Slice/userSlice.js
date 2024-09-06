@@ -14,7 +14,7 @@ export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
             const response = await axiosIN.get(`/users/c/${username}`);
             return response.data.data;
         } catch (error) {
-            toast.error(error?.response?.data?.error)
+            toast.error("Pleace Login!")
             throw error;
         }
     }
@@ -27,7 +27,7 @@ export const getWatchHistory = createAsyncThunk("getWatchhistory",
             return response.data.data;
         } catch (error) {
             console.log(error);
-            toast.error(error?.response?.data?.error);
+            toast.error("Pleace Login!")
             throw error;
         }
     }

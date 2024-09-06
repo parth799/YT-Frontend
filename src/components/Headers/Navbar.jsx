@@ -26,9 +26,9 @@ function Navbar() {
 
   const logout = async () => {
     await dispatch(userLogout());
-    localStorage.clear();
     navigate("/");
-    window.location.reload();
+    localStorage.clear();
+    // window.location.reload();
   };
 
   const sidePanelItems = [
