@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/Button";
 import { createAComment } from "../../store/Slice/commentSlice";
 import { useDispatch } from "react-redux";
+import { createTweet } from "../../store/Slice/tweetSlice";
 
 function Comment({ tweet, comment, videoId }) {
   const { register, handleSubmit, setValue } = useForm();
@@ -11,7 +12,7 @@ function Comment({ tweet, comment, videoId }) {
   const sendContent = (data) => {
     if (data) {
         if (tweet) {
-            // dispatch(createTweet(data))
+            dispatch(createTweet(data))
         } else if (comment) {
             dispatch(createAComment({content:data.content, videoId , dispatch:dispatch}))
         }

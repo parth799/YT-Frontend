@@ -57,7 +57,7 @@ function ChannelNavigate({ username, edit }) {
         >
           <p className="p-2">Playlists</p>
         </NavLink>
-        {/* <NavLink
+        <NavLink
           to={`/channel/${username}/tweets`}
           className={({ isActive }) =>
             isActive
@@ -65,8 +65,8 @@ function ChannelNavigate({ username, edit }) {
               : ""
           }
         >
-          <p className="p-2">Tweets</p>
-        </NavLink> */}
+          <p className="p-2">Community Post</p>
+        </NavLink>
         {user == userProfile && (
           <NavLink
             to={`/channel/${username}/subscribed`}

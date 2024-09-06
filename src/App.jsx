@@ -23,6 +23,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import MySubscriptions from "./pages/MySubscriptions";
 import SearchVideos from "./pages/SearchVideos";
 import PlaylistVideos from "./components/playlist/PlaylistVideos";
+import ChannelTweets from "./pages/Channel/ChannelTweets";
 
 function App() {
   const dispatch = useDispatch();
@@ -91,14 +92,14 @@ function App() {
                 </AuthLayout>
               }
             />
-            {/* <Route
+            <Route
               path="tweets"
               element={
                 <AuthLayout authentication>
                   <ChannelTweets />
                 </AuthLayout>
               }
-            /> */}
+            />
             <Route
               path="subscribed"
               element={

@@ -7,6 +7,7 @@ import likeSlice from "./Slice/likeSlice.js";
 import subscriptionSlice from "./Slice/subscriptionSlice.js";
 import playListSlice from "./Slice/playListSlice.js";
 import dashboardSlice from "./Slice/dashboard.js";
+import tweetSlice from "./Slice/tweetSlice.js";
 
 const store  = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const store  = configureStore({
         subscription: subscriptionSlice,
         playlist: playListSlice,
         dashboard: dashboardSlice,
+        tweet: tweetSlice
     }
 })
 
