@@ -3,12 +3,12 @@ import axiosIN from "../../hooks/axiosIN";
 import { toast } from "react-toastify";
 
 const initialState = {
-    loading : false,
+    loading: false,
     profileData: null,
-    history:[],
+    history: [],
 }
 
-export const userChannelProfile = createAsyncThunk("getUserChannelProfile", 
+export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
     async (username) => {
         try {
             const response = await axiosIN.get(`/users/c/${username}`);
@@ -21,7 +21,7 @@ export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
 )
 
 export const getWatchHistory = createAsyncThunk("getWatchhistory",
-    async () =>{
+    async () => {
         try {
             const response = await axiosIN.get("/users/watch-history");
             return response.data.data;

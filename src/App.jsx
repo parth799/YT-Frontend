@@ -48,10 +48,10 @@ function App() {
             path="/search/:query"
             element={
               <AuthLayout authentication={false}>
-                <SearchVideos /> 
+                <SearchVideos />
               </AuthLayout>
             }
-            />
+          />
           <Route
             path="/playlist/:playlistId"
             element={
@@ -61,13 +61,13 @@ function App() {
             }
           />
           <Route
-          path="/collections"
-          element={
-            <AuthLayout authentication>
-              <AdminDashboard />
+            path="/collections"
+            element={
+              <AuthLayout authentication>
+                <AdminDashboard />
               </AuthLayout>
-          }
-        />
+            }
+          />
           <Route
             path="/channel/:username"
             element={
@@ -122,7 +122,7 @@ function App() {
             element={
               <AuthLayout authentication>
                 <History />
-                </AuthLayout>
+              </AuthLayout>
             }
           />
           <Route
@@ -183,7 +183,7 @@ function App() {
             </AuthLayout>
           }
         />
-        
+
         <Route
           path="/terms&conditions"
           element={

@@ -25,9 +25,9 @@ export const createAccount = createAsyncThunk("register", async (data) => {
                 'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
             },
         });
-        
+
         toast.success("Account created successfully");
-        return response.data; 
+        return response.data;
 
     } catch (error) {
         toast.error(error?.response?.data?.error);
@@ -93,13 +93,13 @@ export const changePassword = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
     // const token = localStorage.getItem("token");
-        try {
-            const response = await axiosIN.get("/users/current-user");            
-            return response.data.data; 
-        } catch (error) {
-            toast.error("Pleace Login!")
-            throw error;
-        } 
+    try {
+        const response = await axiosIN.get("/users/current-user");
+        return response.data.data;
+    } catch (error) {
+        toast.error("Pleace Login!")
+        throw error;
+    }
 });
 
 export const updateAvatar = createAsyncThunk("updateAvatar", async (avatar) => {

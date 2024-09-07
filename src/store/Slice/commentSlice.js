@@ -10,10 +10,10 @@ const initialState = {
     hasNextPage: false
 };
 
-export const createAComment = createAsyncThunk('createAComment', async ({ videoId, content,dispatch }) => {
+export const createAComment = createAsyncThunk('createAComment', async ({ videoId, content, dispatch }) => {
     try {
         await axiosIN.post(`/comment/${videoId}`, { content });
-        dispatch(getVideoComments( {videoId} ));
+        dispatch(getVideoComments({ videoId }));
     } catch (error) {
         toast.error(error?.response?.data?.error);
         throw error;
@@ -31,11 +31,11 @@ export const editAComment = createAsyncThunk("editAComment", async ({ commentId,
     }
 });
 
-export const deleteAComment = createAsyncThunk("deleteAComment", async (commentId,{ dispatch, videoId }) => {
+export const deleteAComment = createAsyncThunk("deleteAComment", async (commentId, { dispatch, videoId }) => {
     try {
         const response = await axiosIN.delete(`/comment/c/${commentId}`);
         toast.success(response.data?.message);
-        dispatch(getVideoComments( videoId ));
+        dispatch(getVideoComments(videoId));
         return commentId;
     } catch (error) {
         toast.error(error?.response?.data?.error);
@@ -44,14 +44,14 @@ export const deleteAComment = createAsyncThunk("deleteAComment", async (commentI
 });
 
 export const getVideoComments = createAsyncThunk('getVideoComments', async ({ videoId, page, limit }) => {
-  
+
     const url = new URL(`${BASE_URL}/comment/${videoId}`);
     if (page) url.searchParams.set("page", page);
     if (limit) url.searchParams.set("limit", limit);
 
     try {
         const response = await axiosIN.get(url);
-        
+
         return response.data.data;
     } catch (error) {
         toast.error(error?.response?.data?.error);

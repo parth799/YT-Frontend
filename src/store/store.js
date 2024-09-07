@@ -9,7 +9,7 @@ import playListSlice from "./Slice/playListSlice.js";
 import dashboardSlice from "./Slice/dashboard.js";
 import tweetSlice from "./Slice/tweetSlice.js";
 
-const store  = configureStore({
+const store = configureStore({
     reducer: {
         auth: authSliceReducer,
         user: userSliceReducer,

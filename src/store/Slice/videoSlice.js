@@ -86,7 +86,7 @@ export const updateAVideo = createAsyncThunk(
     }
 );
 
-export const deleteAVideo = createAsyncThunk('deleteAVideo', async (videoId) =>{
+export const deleteAVideo = createAsyncThunk('deleteAVideo', async (videoId) => {
     try {
         const response = await axiosIN.delete(`/video/v/${videoId}`);
         toast.success("Video deleted successfully");
@@ -97,7 +97,7 @@ export const deleteAVideo = createAsyncThunk('deleteAVideo', async (videoId) =>{
     }
 })
 
-export const getVideoById = createAsyncThunk("getVideoById", async ({videoId}) => {
+export const getVideoById = createAsyncThunk("getVideoById", async ({ videoId }) => {
     try {
         const response = await axiosIN.get(`/video/v/${videoId}`);
         return response.data.data;
@@ -107,7 +107,7 @@ export const getVideoById = createAsyncThunk("getVideoById", async ({videoId}) =
     }
 })
 
-export const togglePublishStatus = createAsyncThunk("togglePublishStatus", async(videoId) => {
+export const togglePublishStatus = createAsyncThunk("togglePublishStatus", async (videoId) => {
     try {
         const response = await axiosIN.patch(`/video/toggle/publish/${videoId}`);
         toast.success(response.data.message);

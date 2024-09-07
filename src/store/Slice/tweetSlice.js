@@ -10,25 +10,44 @@ const initialState = {
 
 export const createTweet = createAsyncThunk("createTweet", async (content) => {
     try {
-        const response = await axiosIN.post("/tweet", content);
+        const response = await axiosIN.post("/tweet", content, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         toast.success(response.data?.message);
         return response.data.data;
     } catch (error) {
-        toast.error(error?.response?.data?.error)
+        toast.error(error?.response?.data?.error);
         throw error;
     }
-})
+});
 
-export const editTweet = createAsyncThunk("editTweet", async ({ tweetId, content }) => {
-    try {
-        const response = await axiosIN.patch(`/tweet/${tweetId}`, { content });
-        toast.success(response.data?.message);
-        return response.data.data;
-    } catch (error) {
-        toast.error(error?.response?.data?.error)
-        throw error;
+
+export const editTweet = createAsyncThunk(
+    "editTweet",
+    async ({ tweetId, content, image }) => {
+        try {
+            const formData = new FormData();
+            formData.append("content", content);
+            if (image) {
+                formData.append("CommunityPostImage", image);
+            }
+
+            const response = await axiosIN.patch(`/tweet/${tweetId}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            toast.success(response.data?.message);
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
     }
-})
+);
+
 
 export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
     try {
@@ -44,8 +63,7 @@ export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
 export const getUserTweets = createAsyncThunk("getUserTweets", async (userId) => {
     try {
         const response = await axiosIN.get(`/tweet/user/${userId}`);
-        console.log("response.data.data", response.data.data);
-        
+        console.log("response.data.data", response.data.data)
         return response.data.data;
     } catch (error) {
         toast.error(error?.response?.data?.error)
@@ -60,10 +78,8 @@ const tweetSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getUserTweets.pending, (state) => {
             state.loading = true;
-        }
-        );
+        });
         builder.addCase(getUserTweets.fulfilled, (state, action) => {
-            console.log("response.data.data--", state.tweets);
             state.loading = false;
             state.tweets = action.payload;
         });
@@ -75,8 +91,6 @@ const tweetSlice = createSlice({
         })
     },
 })
-
-
 
 export const { addTweet } = tweetSlice.actions;
 

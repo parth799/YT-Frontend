@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import axiosIN from "../../hooks/axiosIN"
 
-const initialState ={
+const initialState = {
     loading: false,
     likedVideos: [],
 }
 
-export const toggleVideoLike = createAsyncThunk('toggleVideoLike',async (videoId) => {
+export const toggleVideoLike = createAsyncThunk('toggleVideoLike', async (videoId) => {
     try {
         const response = await axiosIN.post(`/likes/toggle/v/${videoId}`)
         return response.data.data
@@ -16,7 +16,7 @@ export const toggleVideoLike = createAsyncThunk('toggleVideoLike',async (videoId
     }
 })
 
-export const toggleCommentLike = createAsyncThunk("toggleCommentLike",async(commentId) => {
+export const toggleCommentLike = createAsyncThunk("toggleCommentLike", async (commentId) => {
     try {
         const response = await axiosIN.post(`/likes/toggle/c/${commentId}`)
         return response.data.data
