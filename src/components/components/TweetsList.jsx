@@ -4,8 +4,11 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import Like from "./Like";
-import EditComment from "../comment/EditComment";
-import { deleteTweet, editTweet, getUserTweets } from "../../store/Slice/tweetSlice";
+import {
+  deleteTweet,
+  editTweet,
+  getUserTweets,
+} from "../../store/Slice/tweetSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { timeAgo } from "../../hooks/createdAt";
 import EditCommunityPost from "./EditCommunityPost";
@@ -29,7 +32,7 @@ function TweetsList({
     editing: false,
     editedContent: content,
     newImage: null,
-    imagePreviewUrl: CommunityPostImage, 
+    imagePreviewUrl: CommunityPostImage,
     isOpen: false,
     delete: false,
   });
@@ -37,7 +40,7 @@ function TweetsList({
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file); 
+      const imageUrl = URL.createObjectURL(file);
       setEditState((prevState) => ({
         ...prevState,
         newImage: file,
@@ -46,17 +49,22 @@ function TweetsList({
     }
   };
 
-  const handleEditTweet = () => {
+  const handleEditTweet = async () => {
     const { editedContent, newImage } = editState;
-    dispatch(editTweet({ tweetId, content: editedContent, image: newImage }));
+
+    await dispatch(
+      editTweet({ tweetId, content: editedContent, image: newImage })
+    );
+
     setEditState({
       editing: false,
       isOpen: false,
       delete: false,
-      newImage: null, 
-      imagePreviewUrl: CommunityPostImage
+      newImage: null,
+      imagePreviewUrl: CommunityPostImage,
     });
-    dispatch(getUserTweets(userId));
+
+    await dispatch(getUserTweets(userId));
   };
 
   const handleDeleteTweet = async () => {
@@ -72,7 +80,6 @@ function TweetsList({
   return (
     <>
       <div className="text-white w-full flex sm:flex-row flex-col sm:gap-5 gap-3 border-b border-slate-600 p-3 sm:p-5">
-
         {editState.imagePreviewUrl && (
           <div className="relative flex-shrink-0">
             <img
@@ -108,24 +115,17 @@ function TweetsList({
           </div>
 
           {editState.editing ? (
-            <>
-              <EditCommunityPost
-                initialContent={editState.editedContent}
-                onCancel={() =>
-                  setEditState((prevState) => ({
-                    ...prevState,
-                    editing: false,
-                    isOpen: false,
-                  }))
-                }
-                onSave={(newContent) =>
-                  setEditState((prevState) => ({
-                    ...prevState,
-                    editedContent: newContent,
-                  }))
-                }
-              />
-            </>
+            <EditCommunityPost
+              initialContent={editState.editedContent}
+              onCancel={() =>
+                setEditState((prevState) => ({
+                  ...prevState,
+                  editing: false,
+                  isOpen: false,
+                }))
+              }
+              onSave={handleEditTweet}
+            />
           ) : (
             <p>{editState.editedContent}</p>
           )}
@@ -138,7 +138,6 @@ function TweetsList({
               size={20}
             />
 
-            {/* Options for Edit and Delete */}
             {authUsername === username && (
               <div className="w-5 h-5 cursor-pointer">
                 <HiOutlineDotsVertical

@@ -27,26 +27,27 @@ export const createTweet = createAsyncThunk("createTweet", async (content) => {
 export const editTweet = createAsyncThunk(
     "editTweet",
     async ({ tweetId, content, image }) => {
-        try {
-            const formData = new FormData();
-            formData.append("content", content);
-            if (image) {
-                formData.append("CommunityPostImage", image);
-            }
-
-            const response = await axiosIN.patch(`/tweet/${tweetId}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-            toast.success(response.data?.message);
-            return response.data.data;
-        } catch (error) {
-            toast.error(error?.response?.data?.error);
-            throw error;
+      try {
+        const formData = new FormData();
+        formData.append("content", content);  
+        if (image) {
+          formData.append("CommunityPostImage", image);
         }
+  
+        const response = await axiosIN.patch(`/tweet/${tweetId}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        toast.success(response.data?.message);
+        return response.data.data;
+      } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+      }
     }
-);
+  );
+  
 
 
 export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
