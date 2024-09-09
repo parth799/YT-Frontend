@@ -23,7 +23,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import MySubscriptions from "./pages/MySubscriptions";
 import SearchVideos from "./pages/SearchVideos";
 import PlaylistVideos from "./components/playlist/PlaylistVideos";
-import ChannelTweets from "./pages/Channel/ChannelTweets";
+import ChannelCommunity from "./pages/Channel/ChannelCommunity";
 
 function App() {
   const dispatch = useDispatch();
@@ -93,10 +93,10 @@ function App() {
               }
             />
             <Route
-              path="tweets"
+              path="community"
               element={
                 <AuthLayout authentication>
-                  <ChannelTweets />
+                  <ChannelCommunity />
                 </AuthLayout>
               }
             />

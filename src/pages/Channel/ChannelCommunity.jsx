@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTweets, createTweet } from "../../store/Slice/tweetSlice";
-import TweetsList from "../../components/components/TweetsList";
+import CommunityList from "../../components/components/CommunityList";
 import Button from "../../components/components/Button";
 import CommunityPostForm from "../../components/components/CommunityPostForm";
 import Loader from "../../components/loader/Loader";
 
-function ChannelTweets() {
+function ChannelCommunity() {
   const dispatch = useDispatch();
   const authId = useSelector((state) => state.auth?.userData?._id);
   const userId = useSelector((state) => state.user?.profileData?._id);
@@ -59,7 +59,7 @@ function ChannelTweets() {
         </div>
       ) : (
         tweets?.map((tweet) => (
-          <TweetsList
+          <CommunityList
             key={tweet?._id}
             avatar={tweet?.ownerDetails?.avatar?.url}
             content={tweet?.content}
@@ -76,4 +76,4 @@ function ChannelTweets() {
   );
 }
 
-export default ChannelTweets;
+export default ChannelCommunity;

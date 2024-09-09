@@ -49,11 +49,12 @@ function TweetsList({
     }
   };
 
-  const handleEditTweet = async () => {
-    const { editedContent, newImage } = editState;
+  const handleEditTweet = async (updatedContent) => {
+    const { newImage } = editState;
+    console.log("????????", updatedContent); 
 
     await dispatch(
-      editTweet({ tweetId, content: editedContent, image: newImage })
+      editTweet({tweetId, content: updatedContent, image: newImage})
     );
 
     setEditState({

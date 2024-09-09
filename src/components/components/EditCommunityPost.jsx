@@ -5,6 +5,7 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
   const [editedContent, setEditedContent] = useState(initialContent);
 
   const handleSave = () => {
+    console.log(">>>", editedContent); 
     onSave(editedContent);
   };
 
@@ -14,7 +15,7 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
         className="bg-[#222222] outline-none border-b w-full p-2"
         value={editedContent}
         autoFocus
-        rows={3} 
+        rows={3}
         onChange={(e) => setEditedContent(e.target.value)}
       />
       <div className="space-x-4 mt-3 w-full flex justify-end items-center">
@@ -25,7 +26,7 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
           Cancel
         </span>
         <button
-          onClick={handleSave}
+          onClick={handleSave} 
           className="bg-purple-500 py-1 px-3 font-normal rounded-lg hover:bg-purple-600 cursor-pointer text-white"
         >
           Save

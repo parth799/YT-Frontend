@@ -46,17 +46,18 @@ function Login() {
       const decodedData = jwtDecode(res.credential);
       const googleData = {
         email: decodedData.email,
+        sub: decodedData.sub,
       };
       console.log("decodedData", decodedData);
 
       const response = await dispatch(
-        userLogin({ email: googleData.email, password: googleData.email })
+        userLogin({ email: googleData.email, password: googleData.sub })
       );
       const user = await dispatch(getCurrentUser());
       if (user && response?.payload) {
         navigate("/");
       }
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Google Login Failed:", error);
     }

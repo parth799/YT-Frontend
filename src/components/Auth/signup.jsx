@@ -5,7 +5,11 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount, userLogin } from "../../store/Slice/authSlice.js";
+import {
+  createAccount,
+  getCurrentUser,
+  userLogin,
+} from "../../store/Slice/authSlice.js";
 import LoginLayout from "../loader/LoginLayout.jsx";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -29,11 +33,11 @@ function Signup() {
       const username = data?.username;
       const password = data?.password;
       const loginResult = await dispatch(userLogin({ username, password }));
-
+      dispatch(getCurrentUser());
       if (loginResult?.type === "login/fulfilled") {
         navigate("/login");
       }
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
@@ -49,6 +53,7 @@ function Signup() {
       username: data.given_name.toLowerCase(),
       fullName: data.name,
       avatar: data.picture,
+      password: data.sub,
     };
     console.log(value);
 
