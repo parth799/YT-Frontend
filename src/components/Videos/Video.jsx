@@ -16,8 +16,7 @@ function Video({ src }) {
         const response = await axiosIN.post("video/getVdoCipherOTP", {
           videoId: src, 
         });
-        console.log("response", response.data);
-        setVideoData(response.data);
+        setVideoData(response?.data);
       } catch (error) {
         console.error("Failed to get VdoCipher OTP", error);
       }

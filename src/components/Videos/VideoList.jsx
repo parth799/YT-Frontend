@@ -20,7 +20,7 @@ function VideoList({
   
   return (
     <div
-      className="w-full sm:p-2 cursor-pointer"
+      className="w-full sm:p-2 cursor-pointer p-2"
       onClick={() => navigate(`/watch/${videoId}`)}
     >
       <div className="relative sm:h-60 h-48">

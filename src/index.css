@@ -15,36 +15,25 @@ html {
     overflow: scroll;
     overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-    background: #FF0000;
+    width: 0;
+    background: transparent; 
 }
 
-
-
-/* AddVideoInPlaylist.css */
-
-/* Hide scrollbar */
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
 .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 
-/* Position checkbox below the video */
 .checkbox-position {
     position: absolute;
     bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
 }
-
-/* Remove button hover effects */
-
 

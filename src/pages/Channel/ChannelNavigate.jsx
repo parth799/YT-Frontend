@@ -65,7 +65,7 @@ function ChannelNavigate({ username, edit }) {
               : ""
           }
         >
-          <p className="p-2">Community Post</p>
+          <p className="p-2">Community</p>
         </NavLink>
         {user == userProfile && (
           <NavLink

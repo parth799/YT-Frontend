@@ -179,12 +179,15 @@ function Signup() {
             <h5 className="text-center pt-4 font-Poppins text-[14px] text-white ">
               Or join with
             </h5>
+            <div className="flex justify-center">
+
             <GoogleLogin
               onSuccess={(res) => {
                 googlelog(res);
               }}
               onError={() => console.log("SOME THING WHAT WRONG")}
             />
+            </div>
           </form>
         </div>
       </div>

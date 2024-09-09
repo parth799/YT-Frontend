@@ -54,7 +54,7 @@ function VideoDetail() {
     <>
       <Navbar />
       <div className="flex flex-col lg:flex-row lg:space-x-6 sm:p-4 p-2  ">
-        <div className="lg:w-2/3 w-full space-y-6 pl-5">
+        <div className="lg:w-2/3 w-full space-y-6 p-5">
           <Video src={video?.videoFile?.videoId} poster={video?.thumbnail?.url} />
           <Description
             avatar={video?.owner?.avatar.url}
@@ -71,7 +71,7 @@ function VideoDetail() {
             videoId={video?._id}
             channelId={video?.owner?._id}
           />
-          <div className="text-white ml-5 font-semibold sm:px-5 px-3">
+          <div className="text-white m-5 font-semibold sm:px-5 px-3">
             {totalComments} comments
           </div>
           <Comment comment={true} videoId={video?._id} />
