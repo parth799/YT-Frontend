@@ -85,7 +85,7 @@ function Login() {
             <Input
               label="Password: "
               type="password"
-              placeholder="Enter eight digit password"
+              placeholder="Enter eight digit password!"
               {...register("password", {
                 required: "password is required",
               })}
@@ -127,4 +127,3 @@ function Login() {
 }
 
 export default Login;
-d

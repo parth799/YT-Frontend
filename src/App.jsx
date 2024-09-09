@@ -53,7 +53,7 @@ function App() {
             }
           />
           <Route
-            path="/playlist/:playlistId"
+            path="/playlist/:username/:playlistId"
             element={
               <AuthLayout authentication={false}>
                 <PlaylistVideos />

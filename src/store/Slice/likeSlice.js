@@ -38,6 +38,21 @@ export const getLikedVideos = createAsyncThunk("getLikedVideos", async () => {
     }
 });
 
+export const toggleCommunityLike = createAsyncThunk(
+    "toggleTweetLike",
+    async (tweetId) => {
+        try {
+            const response = await axiosIN.post(
+                `/likes/toggle/t/${tweetId}`
+            );
+            return response.data.data;
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+            throw error;
+        }
+    }
+);
+
 const likeSlice = createSlice({
     name: "like",
     initialState,

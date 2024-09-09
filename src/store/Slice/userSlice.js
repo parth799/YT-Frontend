@@ -12,7 +12,9 @@ export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
     async (username) => {
         try {
             const response = await axiosIN.get(`/users/c/${username}`);
-            return response.data.data;
+            console.log("response?.data?.data;", response?.data?.data);
+            
+            return response?.data?.data;
         } catch (error) {
             toast.error("Pleace Login!")
             throw error;

@@ -15,13 +15,14 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import AddVideoInPlaylist from "./AddVideoInPlaylist";
 import RemoveVideoFromPlaylist from "./RemoveVideoFromPlaylist";
+import { userChannelProfile } from "../../store/Slice/userSlice"
 
 function PlaylistVideos() {
-  const { playlistId } = useParams();
+  const { username, playlistId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const playlist = useSelector((state) => state.playlist.playlist);
-  const username = useSelector((state) => state.auth?.userData?.username);
+  const authUsername = useSelector((state) => state.auth?.userData?.username);
   const userId = useSelector((state) => state.user?.profileData?._id);
   const authId = useSelector((state) => state.auth.userData?._id);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -29,10 +30,13 @@ function PlaylistVideos() {
   const [showAddVideoForm, setShowAddVideoForm] = useState(false);
   const [showRemoveVideoForm, setShowRemoveVideoForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  
   useEffect(() => {
     dispatch(getPlaylistById(playlistId));
   }, [dispatch, playlistId]);
+
+  useEffect(() => {
+    dispatch(userChannelProfile(username));
+  }, [dispatch])
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -86,7 +90,7 @@ function PlaylistVideos() {
   const handleDeleteConfirm = async () => {
     await dispatch(deletePlaylist(playlistId));
     setShowDeleteConfirm(false);
-    navigate(`/channel/${username}/playlists`);
+    navigate(`/channel/${authUsername}/playlists`);
   };
 
   return (

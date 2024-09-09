@@ -23,7 +23,7 @@ function VideoList({
       className="w-full sm:p-2 cursor-pointer p-2"
       onClick={() => navigate(`/watch/${videoId}`)}
     >
-      <div className="relative sm:h-60 h-48">
+      <div className="relative sm:h-60 h-[18rem]">
         <img
           src={thumbnail}
           className="object-cover w-full h-full rounded-lg"

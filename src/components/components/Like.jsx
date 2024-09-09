@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { toggleCommentLike, toggleVideoLike } from "../../store/Slice/likeSlice";
+import { toggleCommentLike, toggleCommunityLike, toggleVideoLike } from "../../store/Slice/likeSlice";
 
 function Like({ 
     isLiked,
      likesCount = 0,
-    //   tweetId,
+      tweetId,
        commentId,
         videoId, 
         size
@@ -23,9 +23,9 @@ function Like({
     }
 
     setLocalIsLiked((prev) => !prev);
-    // if (tweetId) {
-    //     dispatch(toggleTweetLike(tweetId));
-    // }
+    if (tweetId) {
+        dispatch(toggleCommunityLike(tweetId));
+    }
     if (commentId) {
         dispatch(toggleCommentLike(commentId));
     }

@@ -5,14 +5,23 @@ import { createAPlaylist, getPlaylistsByUser } from "../../store/Slice/playListS
 import Input from "../../components/components/Input";
 import Button from "../../components/components/Button";
 import { timeAgo } from "../../hooks/createdAt";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { userChannelProfile } from "../../store/Slice/userSlice";
 
 function ChannelPlaylist() {
+    const {username} = useParams();
     const dispatch = useDispatch();
     const playlists = useSelector((state) => state.playlist?.playlists);
     const authId = useSelector((state) => state.auth.userData?._id);
-    const userId = useSelector((state) => state.user.profileData?._id);
+    const userId = useSelector((state) => state?.user?.profileData?._id);
+    console.log("authId", username);
+    console.log("userId", userId);
+    
+    // useEffect(() => {
+    //     dispatch(userChannelProfile(username));
+    //   }, [dispatch, username]);
+
     const {
         register,
         handleSubmit,
@@ -22,6 +31,8 @@ function ChannelPlaylist() {
     useEffect(() => {
         if (authId) {
             dispatch(getPlaylistsByUser(userId));
+        dispatch(userChannelProfile(username));
+
         }
     }, [dispatch, userId]);
 
@@ -105,7 +116,7 @@ function ChannelPlaylist() {
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 p-2 gap-5 grid-cols-1 w-full mt-5">
                     {playlists?.map((playlist, index) => (
                         <Link
-                            to={`/playlist/${playlist._id}`}
+                            to={`/playlist/${username}/${playlist._id}`}
                             key={index}
                             className="relative h-[15rem] w-full border border-slate-500"
                         >
