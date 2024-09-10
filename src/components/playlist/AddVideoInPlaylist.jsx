@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos } from "../../store/Slice/videoSlice";
-import { addVideoToPlayList, getPlaylistById } from "../../store/Slice/playListSlice";
+import {
+  addVideoToPlayList,
+  getPlaylistById,
+} from "../../store/Slice/playListSlice";
 import VideoList from "../Videos/VideoList";
 import Button from "../components/Button";
 import { FaPlayCircle } from "react-icons/fa";
@@ -20,7 +23,9 @@ function AddVideoInPlaylist({ playlistId, onClose }) {
 
   const availableVideos = videos?.filter(
     (video) =>
-      !playlist?.videos?.some((playlistVideo) => playlistVideo._id === video._id)
+      !playlist?.videos?.some(
+        (playlistVideo) => playlistVideo._id === video._id
+      )
   );
 
   const handleCheckboxChange = (videoId) => {
@@ -35,7 +40,7 @@ function AddVideoInPlaylist({ playlistId, onClose }) {
     e.preventDefault();
     for (let videoId of selectedVideos) {
       await dispatch(addVideoToPlayList({ videoId, playlistId }));
-      await dispatch(getPlaylistById( playlistId ));
+      await dispatch(getPlaylistById(playlistId));
     }
     onClose();
   };
@@ -85,9 +90,7 @@ function AddVideoInPlaylist({ playlistId, onClose }) {
         ) : (
           <div className="flex flex-col pb-20 items-center justify-center text-white">
             <FaPlayCircle size={45} className="text-purple-500" />
-            <p className="mt-4 text-lg">
-              There are no videos available here.
-            </p>
+            <p className="mt-4 text-lg">There are no videos available here.</p>
             <Button
               className="bg-red-500 text-sm px-4 py-2 mt-4 rounded"
               onClick={onClose}

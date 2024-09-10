@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Logo from "../components/Logo";
 import Search from "../components/Search";
@@ -20,7 +19,7 @@ function Navbar() {
   const authStatus = useSelector((state) => state.auth.status);
   const username = useSelector((state) => state.auth?.userData?.username);
   const profileImg = useSelector((state) => state.auth.userData?.avatar?.url);
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -77,15 +76,13 @@ function Navbar() {
               className="rounded-full w-10 h-10 object-cover sm:block hidden"
             />
             <span className="text-white hidden sm:inline-block">
-              
-                <div
-                  className="hidden sm:flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border text-white border-slate-600"
-                  onClick={logout}
-                >
-                  <IoMdLogOut size={25} />
-                  <span className="text-base">Logout</span>
-                </div>
-              
+              <div
+                className="hidden sm:flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border text-white border-slate-600"
+                onClick={logout}
+              >
+                <IoMdLogOut size={25} />
+                <span className="text-base">Logout</span>
+              </div>
             </span>
           </div>
         ) : (

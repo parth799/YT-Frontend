@@ -1,5 +1,5 @@
 import axios from "axios"
-import {BASE_URL} from "../env.js"
+import { BASE_URL } from "../env.js"
 
 const axiosIN = axios.create();
 const token = localStorage.getItem("token");

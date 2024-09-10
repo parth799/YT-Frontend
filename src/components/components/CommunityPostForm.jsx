@@ -16,7 +16,6 @@ const CommunityPostForm = ({ onSubmit, onCancel, loading }) => {
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
       <div className="bg-black p-6 rounded-lg shadow-lg max-w-lg w-full">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Content textarea */}
           <textarea
             placeholder="Write Content..."
             className="p-2 text-sm border border-white bg-[#060505] text-white outline-none w-full"
@@ -27,7 +26,6 @@ const CommunityPostForm = ({ onSubmit, onCancel, loading }) => {
             <span className="text-red-500">{errors.content.message}</span>
           )}
           
-          {/* Image upload preview */}
           <div className="w-full">
             <GetImagePreview
               name="image"

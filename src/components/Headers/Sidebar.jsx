@@ -10,6 +10,7 @@ import { TbUserCheck } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userLogout } from "../../store/Slice/authSlice";
+import { CiSettings } from "react-icons/ci";
 
 function Sidebar() {
   const username = useSelector((state) => state.auth.userData?.username);
@@ -100,17 +101,19 @@ function Sidebar() {
           <div className="space-y-4 mb-10">
             {username && (
               <div
-                className="flex items-center  gap-2 justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
+                className="flex items-center gap-2  justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
                 onClick={() => logout()}
               >
                 <IoMdLogOut size={25} />
                 <span className="text-base hidden md:block">Logout</span>
               </div>
             )}
-            {/* <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600">
+            <NavLink to="/setting">
+            <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600">
               <CiSettings size={25} />
               <span className="text-base hidden md:block">Settings</span>
-            </div> */}
+            </div>
+            </NavLink>
           </div>
         </div>
       </div>

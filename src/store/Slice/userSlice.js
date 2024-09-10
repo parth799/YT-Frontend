@@ -13,7 +13,7 @@ export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
         try {
             const response = await axiosIN.get(`/users/c/${username}`);
             console.log("response?.data?.data;", response?.data?.data);
-            
+
             return response?.data?.data;
         } catch (error) {
             toast.error("Pleace Login!")
@@ -21,6 +21,16 @@ export const userChannelProfile = createAsyncThunk("getUserChannelProfile",
         }
     }
 )
+export const stopeWatchHistory = createAsyncThunk("stopeWatchHistory", async (userId) => {
+    try {
+        const response = await axiosIN.patch(`/users/toggle/stophistory/${userId}`);
+        toast.success(response.data.message);
+        return response.data.data;
+    } catch (error) {
+        toast.error(error?.response?.data?.error);
+        throw error;
+    }
+})
 
 export const getWatchHistory = createAsyncThunk("getWatchhistory",
     async () => {
@@ -53,6 +63,9 @@ const userSlice = createSlice({
         builder.addCase(getWatchHistory.fulfilled, (state, action) => {
             state.loading = false;
             state.history = action.payload;
+        });
+        builder.addCase(stopeWatchHistory.fulfilled, (state) => {
+            state.stopeWatchHistory = !state.stopeWatchHistory;
         });
     },
 });

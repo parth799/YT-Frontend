@@ -24,6 +24,7 @@ import MySubscriptions from "./pages/MySubscriptions";
 import SearchVideos from "./pages/SearchVideos";
 import PlaylistVideos from "./components/playlist/PlaylistVideos";
 import ChannelCommunity from "./pages/Channel/ChannelCommunity";
+import Setting from "./pages/Setting";
 
 function App() {
   const dispatch = useDispatch();
@@ -122,6 +123,14 @@ function App() {
             element={
               <AuthLayout authentication>
                 <History />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/setting"
+            element={
+              <AuthLayout authentication>
+                <Setting />
               </AuthLayout>
             }
           />
