@@ -48,7 +48,7 @@ export const getWatchHistory = createAsyncThunk("getWatchhistory",
 export const clearWatchHistory = createAsyncThunk("clearWatchHistory", async () => {
     try {
         const response = await axiosIN.patch("/users/clear-history")
-        console.log("response.data.datammmm ",response.data.data);
+        console.log("response.data.datammmm ", response.data.data);
         return response.data.data;
     } catch (error) {
         console.log(error);

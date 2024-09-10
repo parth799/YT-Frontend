@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
 import { ImBin } from "react-icons/im";
 
-function DeleteConfirmation({ onCancel, onDelete, comment, tweet, video }) {
+function DeleteConfirmation({
+  onCancel,
+  onDelete,
+  comment,
+  tweet,
+  video,
+  content,
+}) {
   return (
     <>
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
@@ -19,9 +26,9 @@ function DeleteConfirmation({ onCancel, onDelete, comment, tweet, video }) {
                 <p className="text-xs text-start text-semibold w-60">
                   <span>
                     Are you sure you want to delete this{" "}
-                    {`${comment ? "Comment" : ""} ${tweet ? "Tweet" : ""} ${
+                    {`${comment ? "Comment" : ""} ${tweet ? "Community" : ""} ${
                       video ? "Video" : ""
-                    }`}
+                    } ${content ? content : ""}`}
                     ?
                   </span>{" "}
                   <span>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Logo from "../components/Logo";
 import Search from "../components/Search";
-import { CiSearch } from "react-icons/ci";
+import { CiSearch, CiSettings } from "react-icons/ci";
 import { SlMenu } from "react-icons/sl";
 import SearchForSmallScreen from "../components/SearchForSmallScreen";
 import { IoMdLogOut } from "react-icons/io";
@@ -27,7 +27,6 @@ function Navbar() {
     await dispatch(userLogout());
     navigate("/");
     localStorage.clear();
-    // window.location.reload();
   };
 
   const sidePanelItems = [
@@ -105,7 +104,7 @@ function Navbar() {
             <SlMenu size={24} onClick={() => setToggleMenu((prev) => !prev)} />
           </div>
         </div>
-
+        
         {toggleMenu && (
           <div className="fixed right-0 top-0 text-white flex flex-col border-l h-screen w-[70%] bg-[#0F0F0F] rounded-lg outline-none z-50">
             <div className="w-full border-b h-20 flex items-center mb-2 justify-between px-3">
@@ -137,7 +136,24 @@ function Navbar() {
                 ))}
               </div>
 
-              {!authStatus ? (
+              {authStatus ? (
+                <div className="space-y-3">
+                  <NavLink to="/setting" onClick={() => setToggleMenu(false)}>
+                    <div className="flex items-center gap-2 justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600">
+                      <CiSettings size={25} />
+                      <span className="text-base">Settings</span>
+                    </div>
+                  </NavLink>
+
+                  <div
+                    className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600"
+                    onClick={logout}
+                  >
+                    <IoMdLogOut size={25} />
+                    <span className="text-base">Logout</span>
+                  </div>
+                </div>
+              ) : (
                 <div className="flex flex-col space-y-5 mb-3">
                   <Link to={"/login"}>
                     <Button className="w-full bg-[#222222] border hover:bg-white hover:text-black border-slate-500 py-2 px-3 text-white">
@@ -149,14 +165,6 @@ function Navbar() {
                       Sign up
                     </Button>
                   </Link>
-                </div>
-              ) : (
-                <div
-                  className="flex gap-2 justify-start items-start cursor-pointer py-1 px-2 border border-slate-600"
-                  onClick={logout}
-                >
-                  <IoMdLogOut size={25} />
-                  <span className="text-base">Logout</span>
                 </div>
               )}
             </div>

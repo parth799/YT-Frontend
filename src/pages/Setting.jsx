@@ -66,6 +66,7 @@ function Setting() {
           onCancel={() => setShowDeleteConfirm(false)}
           onDelete={handleClearHistory}
           video={true}
+          content={"history "}
         />
       )}
     </div>

@@ -97,7 +97,8 @@ export const getCurrentUser = createAsyncThunk("getCurrentUser", async () => {
         const response = await axiosIN.get("/users/current-user");
         return response.data.data;
     } catch (error) {
-        toast.error("Pleace Login!")
+        // toast.error("Pleace Login!")
+        console.log(error);
         throw error;
     }
 });
