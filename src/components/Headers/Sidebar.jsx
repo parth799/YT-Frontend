@@ -80,7 +80,7 @@ function Sidebar() {
   return (
     <>
       <div className="sm:block hidden">
-        <div className="text-white lg:w-56 md:w-44 w-16 sm:p-3 p-2 border-slate-600 border-r h-[95vh] flex flex-col justify-between">
+        <div className="text-white lg:w-56 md:w-44 w-16 sm:p-3 p-2 border-slate-600 border-r h-screen flex flex-col justify-between">
           <div className="flex flex-col gap-4 mt-5">
             {sidebarItems.map((item) => (
               <NavLink
@@ -98,7 +98,7 @@ function Sidebar() {
             ))}
           </div>
 
-          <div className="space-y-4 mb-10">
+          <div className="space-x-4 mb-20">
             {username && (
               <div
                 className="flex items-center gap-2  justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
