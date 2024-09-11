@@ -5,6 +5,8 @@ import { toggleSubscription } from "../../store/Slice/subscriptionSlice";
 import EditAvatar from "../../components/user/EditAvatar";
 import { Link } from "react-router-dom";
 import Button from "../../components/components/Button";
+import { loadStripe } from "@stripe/stripe-js"; // Import Stripe
+import axiosIN from "../../hooks/axiosIN";
 
 function ChannelHeader({
   coverImage,
@@ -38,6 +40,27 @@ function ChannelHeader({
       setLocalSubscribersCount((prev) => prev + 1);
     }
   };
+
+  console.log("channelId", channelId);
+
+  const stripePromise = loadStripe("pk_test_51Pt572DcxgPqDrQhLu97t0PwklaYGSOW5jg84F0d2ISTIvtWjDUMAGtqn866bsGbXpTFWyhaIyOs1mCjVIyDOImr00cOIxl7ow");
+  const makePayment = async () => {
+    const stripe = await stripePromise;
+    try {
+      const response = await axiosIN.post("/users/payment", {username, channelId});
+  
+      const result = await stripe.redirectToCheckout({
+        sessionId: response.data.id,
+      });
+  
+      if (result.error) {
+        console.error("Stripe Checkout Error:", result.error);
+      }
+    } catch (error) {
+      console.error("Payment error:", error.message);
+    }
+  };
+
   return (
     <>
       <div className="w-full text-white">
@@ -47,6 +70,7 @@ function ChannelHeader({
               <img
                 src={coverImage}
                 className="sm:h-40 h-28 w-full object-cover"
+                alt="Channel cover"
               />
               {edit && (
                 <div className="absolute inset-0 flex justify-center items-center">
@@ -58,12 +82,14 @@ function ChannelHeader({
             <div className="sm:h-40 h-28 w-full border-slate-600 border-b bg-black"></div>
           )}
         </section>
-        <section className=" w-full sm:px-5 p-2 flex sm:flex-row flex-col items-start sm:gap-4">
-          <div className=" h-12">
+
+        <section className="w-full sm:px-5 p-2 flex sm:flex-row flex-col items-start sm:gap-4">
+          <div className="h-12">
             <div className="relative sm:w-32 w-28 sm:h-32 h-28">
               <img
                 src={avatar}
                 className="rounded-full sm:w-32 w-28 sm:h-32 h-28 object-cover absolute sm:bottom-10 bottom-20 outline-none"
+                alt="Channel avatar"
               />
               {edit && (
                 <div className="absolute inset-0 flex justify-center items-start">
@@ -72,6 +98,7 @@ function ChannelHeader({
               )}
             </div>
           </div>
+
           <div className="w-full md:h-24 sm:h-20 flex justify-between items-start px-1">
             <div>
               <h1 className="text-xl font-bold">{fullName}</h1>
@@ -85,21 +112,35 @@ function ChannelHeader({
                 </p>
               </div>
             </div>
-            {user == userProfile && !edit && (
+
+            {user === userProfile && !edit && (
               <Link to={"/edit"}>
                 <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
                   Edit
                 </Button>
               </Link>
             )}
-            {user != userProfile && !edit && (
-              <Button
-                onClick={handleSubscribe}
-                className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500"
-              >
-                {localIsSubscribed ? "Subscribed" : "Subscribe"}
-              </Button>
+
+            {user !== userProfile && !edit && (
+              <div className="flex flex-col gap-2">
+                {/* Subscribe button */}
+                <Button
+                  onClick={handleSubscribe}
+                  className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500"
+                >
+                  {localIsSubscribed ? "Subscribed" : "Subscribe"}
+                </Button>
+
+                {/* Join button to trigger payment */}
+                <Button
+                  onClick={makePayment}
+                  className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-green-500"
+                >
+                  Join
+                </Button>
+              </div>
             )}
+
             {edit && (
               <Link to={`/channel/${username}`}>
                 <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
