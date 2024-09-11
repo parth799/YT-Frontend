@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { stopeWatchHistory, clearWatchHistory } from "../store/Slice/userSlice";
 import { getCurrentUser } from "../store/Slice/authSlice";
 import DeleteConfirmation from "../components/components/DeleteConfirmation";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/components/Button";
 
 function Setting() {
   const dispatch = useDispatch();
@@ -13,7 +15,7 @@ function Setting() {
 
   const [isChecked, setIsChecked] = useState(isHistoryStopped || false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-
+ const navigate = useNavigate();
   const handleToggleHistory = async () => {
     await dispatch(stopeWatchHistory(userId));
     setIsChecked(!isChecked);
@@ -31,6 +33,13 @@ function Setting() {
   useEffect(() => {
     setIsChecked(isHistoryStopped);
   }, [isHistoryStopped]);
+
+  const handleEditProfile = () => {
+    navigate("/edit/personalInfo"); 
+  };
+  const changePassword = () => {
+    navigate("/edit/password"); 
+  };
 
   return (
     <div className="p-4 text-white">
@@ -55,10 +64,28 @@ function Setting() {
         <label className="text-lg">Clear Watch History</label>
         <button
           onClick={() => setShowDeleteConfirm(true)}
-          className="bg-red-500 text-white py-2 px-4 rounded-lg hover:opacity-70"
+          className="bg-red-500 text-white py-2 px-4 rounded-lg hover:opacity-70 lg:w-[200px]"
         >
           Clear History
         </button>
+      </div>
+      <div className="flex justify-between items-center mb-4 ">
+        <label className="text-lg">Edit personal information </label>
+        <Button
+          onClick={handleEditProfile}
+          className="bg-purple-500 text-white py-2 px-4 rounded-lg hover:opacity-70 lg:w-[200px]"
+        >
+          Edit Profile
+        </Button>
+      </div>
+      <div className="flex justify-between items-center mb-4 ">
+        <label className="text-lg">Edit Password </label>
+        <Button
+          onClick={changePassword}
+          className="bg-purple-500 text-white py-2 px-4 rounded-lg hover:opacity-70 lg:w-[200px]"
+        >
+          Change Password
+        </Button>
       </div>
 
       {showDeleteConfirm && (

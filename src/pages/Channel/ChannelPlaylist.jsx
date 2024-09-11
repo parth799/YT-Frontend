@@ -50,9 +50,9 @@ function ChannelPlaylist() {
                     </div>
                 )}
                 {authId === userId && (
-                    <div className="w-full flex justify-center mt-5">
+                    <div className="w-full flex  mt-5">
                         <Button
-                            className="bg-purple-500 text-sm p-2"
+                            className="bg-purple-500 text-white px-4 py-2 m-4 rounded"
                             onClick={() =>
                                 setOpenCreatePlaylist((prev) => !prev)
                             }
@@ -113,7 +113,7 @@ function ChannelPlaylist() {
                         </div>
                     </div>
                 )}
-                <div className="grid xl:grid-cols-3 md:grid-cols-2 p-2 gap-5 grid-cols-1 w-full mt-5">
+                <div className="grid xl:grid-cols-3 md:grid-cols-2 p-2 gap-5 grid-cols-1 w-full mt-5 sm:p-4">
                     {playlists?.map((playlist, index) => (
                         <Link
                             to={`/playlist/${username}/${playlist._id}`}

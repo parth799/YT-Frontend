@@ -33,7 +33,7 @@ function Sidebar() {
     {
       icon: <HiOutlineVideoCamera size={25} />,
       title: "My Channel",
-      url: `/channel/${username}`,
+      url: `/channel/${username}/videos`,
     },
     {
       icon: <IoFolderOutline size={25} />,
@@ -100,20 +100,23 @@ function Sidebar() {
 
           <div className="space-x-4 mb-20">
             {username && (
-              <div
-                className="flex items-center gap-2  justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
-                onClick={() => logout()}
-              >
-                <IoMdLogOut size={25} />
-                <span className="text-base hidden md:block">Logout</span>
-              </div>
+              <>
+                <div
+                  className="flex items-center gap-2  justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
+                  onClick={() => logout()}
+                >
+                  <IoMdLogOut size={25} />
+                  <span className="text-base hidden md:block">Logout</span>
+                </div>
+
+                <NavLink to="/setting">
+                  <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600">
+                    <CiSettings size={25} />
+                    <span className="text-base hidden md:block">Settings</span>
+                  </div>
+                </NavLink>
+              </>
             )}
-            <NavLink to="/setting">
-            <div className="flex items-center gap-2 justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600">
-              <CiSettings size={25} />
-              <span className="text-base hidden md:block">Settings</span>
-            </div>
-            </NavLink>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ function EditChannel() {
                 />
             )}
             <ChannelNavigate edit={true} />
-            <div className="overflow-y-scroll h-[32rem] sm:h-100 mb-20 sm:mb-0">
+            <div className="overflow-y-scroll h-[23rem] sm:h-100 mb-20 sm:mb-0">
                 <Outlet />
             </div>
         </>

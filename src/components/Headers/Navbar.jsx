@@ -38,7 +38,7 @@ function Navbar() {
     {
       icon: <HiOutlineVideoCamera size={25} />,
       title: "My Content",
-      url: `/channel/${username}`,
+      url: `/channel/${username}/videos`,
     },
   ];
 
@@ -104,7 +104,7 @@ function Navbar() {
             <SlMenu size={24} onClick={() => setToggleMenu((prev) => !prev)} />
           </div>
         </div>
-        
+
         {toggleMenu && (
           <div className="fixed right-0 top-0 text-white flex flex-col border-l h-screen w-[70%] bg-[#0F0F0F] rounded-lg outline-none z-50">
             <div className="w-full border-b h-20 flex items-center mb-2 justify-between px-3">
