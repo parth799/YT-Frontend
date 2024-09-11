@@ -1,7 +1,6 @@
 // import React from 'react'
 
 import { BiHistory, BiLike } from "react-icons/bi";
-// import { CiSettings } from "react-icons/ci";
 import { HiOutlineVideoCamera } from "react-icons/hi2";
 import { IoMdLogOut } from "react-icons/io";
 import { IoFolderOutline } from "react-icons/io5";

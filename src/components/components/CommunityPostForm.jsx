@@ -25,7 +25,7 @@ const CommunityPostForm = ({ onSubmit, onCancel, loading }) => {
           {errors.content && (
             <span className="text-red-500">{errors.content.message}</span>
           )}
-          
+
           <div className="w-full">
             <GetImagePreview
               name="image"
@@ -57,7 +57,7 @@ const CommunityPostForm = ({ onSubmit, onCancel, loading }) => {
             >
               {loading ? (
                 <>
-                  <Loader width={4} /> 
+                  <Loader width={4} />
                   <span className="ml-2">Submitting...</span>
                 </>
               ) : (

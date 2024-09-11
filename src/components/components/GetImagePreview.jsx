@@ -52,7 +52,7 @@ function GetImagePreview({
                 }}
               />
             )}
-            rules={{required:  `${name} iss required`}}
+            rules={{ required: `${name} iss required` }}
           />
         </label>
       </div>

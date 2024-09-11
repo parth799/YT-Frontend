@@ -5,7 +5,7 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
   const [editedContent, setEditedContent] = useState(initialContent);
 
   const handleSave = () => {
-    console.log(">>>", editedContent); 
+    console.log(">>>", editedContent);
     onSave(editedContent);
   };
 
@@ -26,7 +26,7 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
           Cancel
         </span>
         <button
-          onClick={handleSave} 
+          onClick={handleSave}
           className="bg-purple-500 py-1 px-3 font-normal rounded-lg hover:bg-purple-600 cursor-pointer text-white"
         >
           Save
