@@ -5,8 +5,9 @@ import { toggleSubscription } from "../../store/Slice/subscriptionSlice";
 import EditAvatar from "../../components/user/EditAvatar";
 import { Link } from "react-router-dom";
 import Button from "../../components/components/Button";
-import { loadStripe } from "@stripe/stripe-js"; // Import Stripe
+import { loadStripe } from "@stripe/stripe-js";
 import axiosIN from "../../hooks/axiosIN";
+import { userChannelProfile } from "../../store/Slice/userSlice";
 
 function ChannelHeader({
   coverImage,
@@ -22,14 +23,30 @@ function ChannelHeader({
   const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed);
   const [localSubscribersCount, setLocalSubscribersCount] =
     useState(subscribersCount);
+  const [isOfficialMember, setIsOfficialMember] = useState(false);
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.user?.profileData?._id);
+  const joinUsers = useSelector((state) => state.user?.profileData?.joinUsers);
   const user = useSelector((state) => state.auth?.userData?._id);
+  const [channelJoinCount, setChannelJoinCount] = useState(0); 
+
+  useEffect(() => {
+    dispatch(userChannelProfile(username));
+  }, [dispatch]);
 
   useEffect(() => {
     setLocalSubscribersCount(subscribersCount);
     setLocalIsSubscribed(isSubscribed);
-  }, [subscribersCount, isSubscribed]);
+
+    if (joinUsers && joinUsers.includes(channelId)) {
+      setIsOfficialMember(true);
+    } else {
+      setIsOfficialMember(false);
+    }
+    if (joinUsers) {
+      setChannelJoinCount(joinUsers.length);
+    }
+  }, [subscribersCount, isSubscribed, joinUsers, channelId]);
 
   const handleSubscribe = () => {
     dispatch(toggleSubscription(channelId));
@@ -41,18 +58,21 @@ function ChannelHeader({
     }
   };
 
-  console.log("channelId", channelId);
-
-  const stripePromise = loadStripe("pk_test_51Pt572DcxgPqDrQhLu97t0PwklaYGSOW5jg84F0d2ISTIvtWjDUMAGtqn866bsGbXpTFWyhaIyOs1mCjVIyDOImr00cOIxl7ow");
+  const stripePromise = loadStripe(
+    "pk_test_51Pt572DcxgPqDrQhLu97t0PwklaYGSOW5jg84F0d2ISTIvtWjDUMAGtqn866bsGbXpTFWyhaIyOs1mCjVIyDOImr00cOIxl7ow"
+  );
   const makePayment = async () => {
     const stripe = await stripePromise;
     try {
-      const response = await axiosIN.post("/users/payment", {username, channelId});
-  
+      const response = await axiosIN.post("/users/payment", {
+        username,
+        channelId,
+      });
+
       const result = await stripe.redirectToCheckout({
         sessionId: response.data.id,
       });
-  
+
       if (result.error) {
         console.error("Stripe Checkout Error:", result.error);
       }
@@ -60,7 +80,6 @@ function ChannelHeader({
       console.error("Payment error:", error.message);
     }
   };
-
   return (
     <>
       <div className="w-full text-white">
@@ -110,6 +129,9 @@ function ChannelHeader({
                 <p className="text-xs text-slate-400">
                   {subscribedCount && subscribedCount} Subscribed
                 </p>
+               {channelId === user && (<p className="text-xs text-slate-300">
+                  {channelJoinCount} Official Members
+                </p>)}
               </div>
             </div>
 
@@ -130,14 +152,21 @@ function ChannelHeader({
                 >
                   {localIsSubscribed ? "Subscribed" : "Subscribe"}
                 </Button>
-
-                {/* Join button to trigger payment */}
-                <Button
-                  onClick={makePayment}
-                  className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-green-500"
-                >
-                  Join
-                </Button>
+                {isOfficialMember ? (
+                  <Button
+                    disabled
+                    className="border-slate-500 cursor-default transition-all text-black font-bold px-4 py-1 bg-green-500"
+                  >
+                    You are an official member
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={makePayment}
+                    className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-green-500"
+                  >
+                    Join
+                  </Button>
+                )}
               </div>
             )}
 

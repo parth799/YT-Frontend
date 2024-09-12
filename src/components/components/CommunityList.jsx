@@ -51,7 +51,6 @@ function TweetsList({
 
   const handleEditTweet = async (updatedContent) => {
     const { newImage } = editState;
-    console.log("????????", updatedContent);
 
     await dispatch(
       editTweet({ tweetId, content: updatedContent, image: newImage })

@@ -22,7 +22,6 @@ function Login() {
   const loading = useSelector((state) => state.auth?.loading);
 
   const submit = async (data) => {
-    console.log("data", data);
 
     const isEmail = data.username.includes("@");
     const loginData = isEmail
@@ -48,7 +47,6 @@ function Login() {
         email: decodedData.email,
         sub: decodedData.sub,
       };
-      console.log("decodedData", decodedData);
 
       const response = await dispatch(
         userLogin({ email: googleData.email, password: googleData.sub })

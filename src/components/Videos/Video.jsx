@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 import axiosIN from "../../hooks/axiosIN";
 
-function Video({ src }) {
-  console.log("src",src);
-  
+function Video({ src }) {  
   const [videoData, setVideoData] = useState({
     otp: "",
     playbackInfo: "",

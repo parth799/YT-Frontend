@@ -64,7 +64,6 @@ export const deleteTweet = createAsyncThunk("deleteTweet", async (tweetId) => {
 export const getUserTweets = createAsyncThunk("getUserTweets", async (userId) => {
     try {
         const response = await axiosIN.get(`/tweet/user/${userId}`);
-        console.log("response.data.data", response.data.data)
         return response.data.data;
     } catch (error) {
         toast.error(error?.response?.data?.error)

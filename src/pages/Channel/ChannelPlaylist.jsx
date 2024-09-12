@@ -15,8 +15,6 @@ function ChannelPlaylist() {
     const playlists = useSelector((state) => state.playlist?.playlists);
     const authId = useSelector((state) => state.auth.userData?._id);
     const userId = useSelector((state) => state?.user?.profileData?._id);
-    console.log("authId", username);
-    console.log("userId", userId);
     
     // useEffect(() => {
     //     dispatch(userChannelProfile(username));

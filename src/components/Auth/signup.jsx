@@ -46,7 +46,6 @@ function Signup() {
   }
   const googlelog = async (res) => {
     const data = jwtDecode(res.credential);
-    console.log("data", data);
 
     const value = {
       email: data.email,
@@ -55,11 +54,9 @@ function Signup() {
       avatar: data.picture,
       password: data.sub,
     };
-    console.log(value);
 
     try {
       const response = await axiosIN.post(`/users/google`, value);
-      console.log("response", response.data);
       const { user, accessToken } = response.data.data;
       localStorage.setItem("token", accessToken);
       if (response.data.success) {

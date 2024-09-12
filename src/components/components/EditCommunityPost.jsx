@@ -5,7 +5,6 @@ function EditCommunityPost({ initialContent, onCancel, onSave }) {
   const [editedContent, setEditedContent] = useState(initialContent);
 
   const handleSave = () => {
-    console.log(">>>", editedContent);
     onSave(editedContent);
   };
 
