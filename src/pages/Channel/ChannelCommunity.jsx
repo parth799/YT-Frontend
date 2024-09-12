@@ -45,7 +45,7 @@ function ChannelCommunity() {
 
           {isPostFormVisible && (
             <CommunityPostForm
-            loading={loading}
+              loading={loading}
               onSubmit={submitCommunityPost}
               onCancel={() => setPostFormVisible(false)}
             />

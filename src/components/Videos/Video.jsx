@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axiosIN from "../../hooks/axiosIN";
 
-function Video({ src }) {  
+function Video({ src }) {
   const [videoData, setVideoData] = useState({
     otp: "",
     playbackInfo: "",
@@ -12,7 +12,7 @@ function Video({ src }) {
     const fetchVideoData = async () => {
       try {
         const response = await axiosIN.post("video/getVdoCipherOTP", {
-          videoId: src, 
+          videoId: src,
         });
         setVideoData(response?.data);
       } catch (error) {
@@ -23,7 +23,9 @@ function Video({ src }) {
   }, [src]);
 
   return (
-    <div style={{ position: "relative", paddingTop: "56.25%", overflow: "hidden" }}>
+    <div
+      style={{ position: "relative", paddingTop: "56.25%", overflow: "hidden" }}
+    >
       {videoData.otp && videoData.playbackInfo && (
         <iframe
           src={`https://player.vdocipher.com/v2/?otp=${videoData.otp}&playbackInfo=${videoData.playbackInfo}&player=LJI5RljfS571nEpK`}

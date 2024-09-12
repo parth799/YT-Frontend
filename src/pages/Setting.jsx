@@ -15,7 +15,7 @@ function Setting() {
 
   const [isChecked, setIsChecked] = useState(isHistoryStopped || false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleToggleHistory = async () => {
     await dispatch(stopeWatchHistory(userId));
     setIsChecked(!isChecked);
@@ -35,10 +35,10 @@ function Setting() {
   }, [isHistoryStopped]);
 
   const handleEditProfile = () => {
-    navigate("/edit/personalInfo"); 
+    navigate("/edit/personalInfo");
   };
   const changePassword = () => {
-    navigate("/edit/password"); 
+    navigate("/edit/password");
   };
 
   return (

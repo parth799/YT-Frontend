@@ -55,7 +55,10 @@ function VideoDetail() {
       <Navbar />
       <div className="flex flex-col lg:flex-row lg:space-x-6 sm:p-4 p-2  ">
         <div className="lg:w-2/3 w-full space-y-6 p-5 ">
-          <Video src={video?.videoFile?.videoId} poster={video?.thumbnail?.url} />
+          <Video
+            src={video?.videoFile?.videoId}
+            poster={video?.thumbnail?.url}
+          />
           <Description
             avatar={video?.owner?.avatar.url}
             channelName={video?.owner?.username}
