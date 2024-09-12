@@ -28,7 +28,7 @@ function ChannelHeader({
   const userProfile = useSelector((state) => state.user?.profileData?._id);
   const joinUsers = useSelector((state) => state.user?.profileData?.joinUsers);
   const user = useSelector((state) => state.auth?.userData?._id);
-  const [channelJoinCount, setChannelJoinCount] = useState(0); 
+  const [channelJoinCount, setChannelJoinCount] = useState(0);
 
   useEffect(() => {
     dispatch(userChannelProfile(username));
@@ -58,9 +58,7 @@ function ChannelHeader({
     }
   };
 
-  const stripePromise = loadStripe(
-    "pk_test_51Pt572DcxgPqDrQhLu97t0PwklaYGSOW5jg84F0d2ISTIvtWjDUMAGtqn866bsGbXpTFWyhaIyOs1mCjVIyDOImr00cOIxl7ow"
-  );
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIP_KEY);
   const makePayment = async () => {
     const stripe = await stripePromise;
     try {
@@ -129,9 +127,11 @@ function ChannelHeader({
                 <p className="text-xs text-slate-400">
                   {subscribedCount && subscribedCount} Subscribed
                 </p>
-               {channelId === user && (<p className="text-xs text-slate-300">
-                  {channelJoinCount} Official Members
-                </p>)}
+                {channelId === user && (
+                  <p className="text-xs text-slate-300">
+                    {channelJoinCount} Official Members
+                  </p>
+                )}
               </div>
             </div>
 

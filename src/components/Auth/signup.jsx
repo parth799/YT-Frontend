@@ -35,9 +35,10 @@ function Signup() {
       const loginResult = await dispatch(userLogin({ username, password }));
       dispatch(getCurrentUser());
       if (loginResult?.type === "login/fulfilled") {
+        navigate("/terms&conditions");
+      } else {
         navigate("/login");
       }
-      // window.location.reload();
     }
   };
 
@@ -60,10 +61,11 @@ function Signup() {
       const { user, accessToken } = response.data.data;
       localStorage.setItem("token", accessToken);
       if (response.data.success) {
-        navigate("/");
+        navigate("/terms&conditions");
         toast.success("Account created successfully");
+      }else {
+        navigate("/login");
       }
-      window.location.reload();
 
       return user;
     } catch (error) {
@@ -177,13 +179,12 @@ function Signup() {
               Or join with
             </h5>
             <div className="flex justify-center">
-
-            <GoogleLogin
-              onSuccess={(res) => {
-                googlelog(res);
-              }}
-              onError={() => console.log("SOME THING WHAT WRONG")}
-            />
+              <GoogleLogin
+                onSuccess={(res) => {
+                  googlelog(res);
+                }}
+                onError={() => console.log("SOME THING WHAT WRONG")}
+              />
             </div>
           </form>
         </div>

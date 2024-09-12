@@ -25,6 +25,7 @@ import SearchVideos from "./pages/SearchVideos";
 import PlaylistVideos from "./components/playlist/PlaylistVideos";
 import ChannelCommunity from "./pages/Channel/ChannelCommunity";
 import Setting from "./pages/Setting";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 function App() {
   const dispatch = useDispatch();
@@ -197,7 +198,7 @@ function App() {
           path="/terms&conditions"
           element={
             <AuthLayout authentication>
-              {/* <TermsAndConditions /> */}
+              <TermsAndConditions />
             </AuthLayout>
           }
         />
