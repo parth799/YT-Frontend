@@ -39,7 +39,7 @@ function ChannelHeader({
     setLocalSubscribersCount(subscribersCount);
     setLocalIsSubscribed(isSubscribed);
 
-    if (joinUsers && joinUsers.includes(channelId)) {
+    if (joinUsers && joinUsers.includes(user)) {
       setIsOfficialMember(true);
     } else {
       setIsOfficialMember(false);
@@ -47,7 +47,7 @@ function ChannelHeader({
     if (joinUsers) {
       setChannelJoinCount(joinUsers.length);
     }
-  }, [subscribersCount, isSubscribed, joinUsers, channelId]);
+  }, [subscribersCount, isSubscribed, joinUsers, user]);
 
   const handleSubscribe = () => {
     dispatch(toggleSubscription(channelId));
@@ -79,6 +79,7 @@ function ChannelHeader({
       console.error("Payment error:", error.message);
     }
   };
+
   return (
     <>
       <div className="w-full text-white">
@@ -153,6 +154,8 @@ function ChannelHeader({
                 >
                   {localIsSubscribed ? "Subscribed" : "Subscribe"}
                 </Button>
+
+                {/* Display correct button based on membership status */}
                 {isOfficialMember ? (
                   <Button
                     disabled

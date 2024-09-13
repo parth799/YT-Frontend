@@ -26,6 +26,8 @@ function Description({
   const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed);
   const [localSubscribersCount, setLocalSubscribersCount] =
     useState(subscribersCount);
+  const [isExpanded, setIsExpanded] = useState(false); // State to toggle description
+
   const dispatch = useDispatch();
 
   const handleSubscribe = () => {
@@ -34,8 +36,12 @@ function Description({
     setLocalSubscribersCount((prev) => prev + (localIsSubscribed ? -1 : 1));
   };
 
+  const toggleDescription = () => {
+    setIsExpanded((prev) => !prev); // Toggle the description state
+  };
+
   return (
-    <section className="sm:max-w-4xl w-full text-white sm:p-5 p-2  ml-5 space-y-2">
+    <section className="sm:max-w-4xl w-full text-white sm:p-5 p-2 space-y-2">
       <div className="border-b border-slate-700">
         <div className="space-y-2 mb-2">
           <h1 className="sm:text-2xl font-semibold">{title}</h1>
@@ -76,9 +82,37 @@ function Description({
           </div>
         </div>
       </div>
-      <p className="text-xs bg-[#222222] rounded-lg p-2 outline-none">
-        {description}
-      </p>
+      {/* Description with read more/less functionality */}
+      <div className="relative">
+        <p
+          className={`text-xs bg-[#222222] rounded-lg p-2 outline-none transition-all duration-300 ${
+            isExpanded ? "max-h-full" : "max-h-12 overflow-hidden line-clamp-2"
+          }`}
+        >
+          {description}
+        </p>
+
+        {!isExpanded && (
+          <div className="absolute bottom-0 right-0 bg-[#222222] p-1">
+            <span
+              className="cursor-pointer text-purple-500"
+              onClick={toggleDescription}
+            >
+              ...
+            </span>
+          </div>
+        )}
+        {isExpanded && (
+          <div className="mt-2 text-right">
+            <span
+              className="cursor-pointer text-purple-500"
+              onClick={toggleDescription}
+            >
+              Show Less
+            </span>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

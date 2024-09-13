@@ -57,7 +57,7 @@ function CommentList({
   };
 
   return (
-    <div className="text-white w-full flex justify-start items-center sm:gap-5 gap-3 border-b border-slate-600 p-3 ml-5 sm:p-5">
+    <div className="text-white w-full flex justify-start items-center sm:gap-5 gap-3 border-b border-slate-600 p-3 sm:p-5">
       <div className="w-12">
         <img
           src={avatar || avatar2}

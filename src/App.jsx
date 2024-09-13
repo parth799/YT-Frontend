@@ -3,7 +3,6 @@ import Layout from "./Layout";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/login";
 import { getCurrentUser } from "./store/Slice/authSlice";
 import { useDispatch } from "react-redux";
@@ -26,6 +25,7 @@ import PlaylistVideos from "./components/playlist/PlaylistVideos";
 import ChannelCommunity from "./pages/Channel/ChannelCommunity";
 import Setting from "./pages/Setting";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Signup from "./components/Auth/signup";
 
 function App() {
   const dispatch = useDispatch();

@@ -54,7 +54,7 @@ function VideoDetail() {
     <>
       <Navbar />
       <div className="flex flex-col lg:flex-row lg:space-x-6 sm:p-4 p-2  ">
-        <div className="lg:w-2/3 w-full space-y-6 p-5 ">
+        <div className="lg:w-2/3 w-full space-y-5 ">
           <Video
             src={video?.videoFile?.videoId}
             poster={video?.thumbnail?.url}
@@ -74,7 +74,7 @@ function VideoDetail() {
             videoId={video?._id}
             channelId={video?.owner?._id}
           />
-          <div className="text-white m-5 font-semibold sm:px-5 px-3">
+          <div className="text-white font-semibold sm:px-5 px-3">
             {totalComments} comments
           </div>
           <Comment comment={true} videoId={video?._id} />
@@ -82,7 +82,7 @@ function VideoDetail() {
             fetchMore={fetchMoreComments}
             hasNextPage={hasNextPage}
           >
-            <div className="w-full sm:max-w-4xl space-y-4 ">
+            <div className="w-full sm:max-w-4xl ">
               {comments?.map((comment, index) => (
                 <CommentList
                   key={index}
@@ -104,7 +104,7 @@ function VideoDetail() {
           </InfiniteScroll>
         </div>
         <div className="lg:w-1/3 w-full max-h-[250vh] overflow-y-auto">
-          <div className="text-white mb-4">Up Next</div>
+          <div className="text-white mb-4">Releted videos More</div>
           <div className="space-y-4">
             {videos
               ?.filter((video) => video._id !== videoId)
@@ -123,7 +123,7 @@ function VideoDetail() {
               ))}
           </div>
         </div>
-      </div>
+       </div>
     </>
   );
 }
