@@ -12,7 +12,6 @@ function Like({ isLiked, likesCount = 0, tweetId, commentId, videoId, size }) {
   const dispatch = useDispatch();
   const [localIsLiked, setLocalIsLiked] = useState(isLiked);
   const [localLikesCount, setLocalLikesCount] = useState(likesCount);
- console.log("localLikesCount" ,localLikesCount);
  
   const handleLikeToggle = () => {
     if (localIsLiked) {

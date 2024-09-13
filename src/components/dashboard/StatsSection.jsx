@@ -21,7 +21,7 @@ function StatsSection({ dashboard }) {
           <span className="font-bold text-2xl">{dashboard?.totalViews}</span>
         </div>
         <div className="border border-slate-500 sm:p-3 p-2">
-          <RxAvatar className="text-purple-500 mb-2" size={30} />
+          <RxAvatar className="text-purple-500 mb-2 whitespace-nowrap" size={30} />
           <p>Total subscribers</p>
           <span className="font-bold text-2xl">
             {dashboard?.totalSubscribers}

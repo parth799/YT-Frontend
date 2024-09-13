@@ -103,7 +103,7 @@ function Sidebar() {
                 <div
                   className="flex items-center gap-2  justify-center sm:justify-start hover:bg-purple-500 cursor-pointer py-1 px-2 border border-slate-600"
                   onClick={() => logout()}
-                >
+                > 
                   <IoMdLogOut size={25} />
                   <span className="text-base hidden md:block">Logout</span>
                 </div>
