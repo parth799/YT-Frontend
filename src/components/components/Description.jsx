@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-
 import { timeAgo } from "../../hooks/createdAt";
 import { Link } from "react-router-dom";
 import Button from "./Button";
@@ -26,7 +24,7 @@ function Description({
   const [localIsSubscribed, setLocalIsSubscribed] = useState(isSubscribed);
   const [localSubscribersCount, setLocalSubscribersCount] =
     useState(subscribersCount);
-  const [isExpanded, setIsExpanded] = useState(false); // State to toggle description
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -37,7 +35,7 @@ function Description({
   };
 
   const toggleDescription = () => {
-    setIsExpanded((prev) => !prev); // Toggle the description state
+    setIsExpanded((prev) => !prev);
   };
 
   return (
@@ -82,11 +80,10 @@ function Description({
           </div>
         </div>
       </div>
-      {/* Description with read more/less functionality */}
-      <div className="relative">
+      <div className="realtive">
         <p
           className={`text-xs bg-[#222222] rounded-lg p-2 outline-none transition-all duration-300 ${
-            isExpanded ? "max-h-full" : "max-h-12 overflow-hidden line-clamp-2"
+            isExpanded ? "max-h-full" : "max-h-10  overflow-hidden line-clamp-2"
           }`}
         >
           {description}
