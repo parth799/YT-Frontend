@@ -88,7 +88,7 @@ function TweetsList({
               alt="Community Post"
             />
             {editState.editing && (
-              <div className="absolute top-2 right-2">
+              <div className="absolute top-[2.4rem] lg:right-[5.4rem] right-[16rem] md:right-[5rem]  text-[30px]">
                 <label htmlFor="imageUpload">
                   <MdOutlineCloudUpload className="hover:text-gray-200 text-black rounded-md bg-white opacity-80 hover:opacity-100 p-1 cursor-pointer" />
                 </label>
@@ -137,22 +137,7 @@ function TweetsList({
               tweetId={tweetId}
               size={20}
             />
-
-            {authUsername === username && (
-              <div className="w-5 h-5 cursor-pointer">
-                <HiOutlineDotsVertical
-                  onClick={() =>
-                    setEditState((prevState) => ({
-                      ...prevState,
-                      isOpen: !prevState.isOpen,
-                    }))
-                  }
-                />
-              </div>
-            )}
-          </div>
-
-          {editState.isOpen && (
+            {editState.isOpen && (
             <div className="border bg-[#222222] text-lg border-slate-600 absolute text-center right-5 rounded-xl">
               <ul>
                 <li
@@ -182,6 +167,22 @@ function TweetsList({
               </ul>
             </div>
           )}
+
+            {authUsername === username && (
+              <div className="w-5 h-5 cursor-pointer">
+                <HiOutlineDotsVertical
+                  onClick={() =>
+                    setEditState((prevState) => ({
+                      ...prevState,
+                      isOpen: !prevState.isOpen,
+                    }))
+                  }
+                />
+              </div>
+            )}
+          </div>
+
+          
 
           {editState.delete && (
             <DeleteConfirmation

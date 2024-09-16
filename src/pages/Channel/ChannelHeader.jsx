@@ -138,7 +138,7 @@ function ChannelHeader({
             </div>
 
             {user === userProfile && !edit && (
-              <Link to={"/edit"}>
+              <Link to={"/edit/personalInfo"}>
                 <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
                   Edit
                 </Button>
@@ -173,8 +173,8 @@ function ChannelHeader({
             )}
 
             {edit && (
-              <Link to={`/channel/${username}`}>
-                <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500">
+              <Link to={`/channel/${username}/videos`}>
+                <Button className="border-slate-500 hover:scale-110 transition-all text-black font-bold lg:px-4 sm:px-2 py-1 lg:text-[15px] text-[15px] p-2 bg-purple-500  ">
                   View Channel
                 </Button>
               </Link>
