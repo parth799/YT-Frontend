@@ -147,7 +147,6 @@ function ChannelHeader({
 
             {user !== userProfile && !edit && (
               <div className="flex flex-col gap-2">
-                {/* Subscribe button */}
                 <Button
                   onClick={handleSubscribe}
                   className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-purple-500"
@@ -155,8 +154,7 @@ function ChannelHeader({
                   {localIsSubscribed ? "Subscribed" : "Subscribe"}
                 </Button>
 
-                {/* Display correct button based on membership status */}
-                {isOfficialMember ? (
+                {isOfficialMember && localIsSubscribed ? (
                   <Button
                     disabled
                     className="border-slate-500 cursor-default transition-all text-black font-bold px-4 py-1 bg-green-500"
@@ -164,13 +162,13 @@ function ChannelHeader({
                     You are an official member
                   </Button>
                 ) : (
-                  <Button
+                  localIsSubscribed && (<Button
                     onClick={makePayment}
                     className="border-slate-500 hover:scale-110 transition-all text-black font-bold px-4 py-1 bg-green-500"
                   >
                     Join
-                  </Button>
-                )}
+                  </Button>)
+                )} 
               </div>
             )}
 

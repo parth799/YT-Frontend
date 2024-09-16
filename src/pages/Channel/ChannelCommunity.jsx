@@ -11,7 +11,7 @@ function ChannelCommunity() {
   const authId = useSelector((state) => state.auth?.userData?._id);
   const userId = useSelector((state) => state.user?.profileData?._id);
   const tweets = useSelector((state) => state.tweet?.tweets);
-  const loading = useSelector((state) => state.tweet?.loading); // Check loading state
+  const loading = useSelector((state) => state.tweet?.loading);
 
   const [isPostFormVisible, setPostFormVisible] = useState(false);
 

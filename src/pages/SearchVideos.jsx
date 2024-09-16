@@ -59,15 +59,15 @@ function SearchVideos() {
       <div className="w-full text-white">
         {filterOpen && (
           <div className="w-full absolute bg-transparent">
-            <div className="max-w-sm border border-slate-800 rounded bg-[#222222] fixed mx-auto z-50 inset-x-0 h-96 p-5">
+            <div className="max-w-sm border border-slate-800 rounded bg-[#222222] fixed mx-auto z-50 inset-x-0 h-[19rem] p-5">
               <h1 className="font-semibold text-lg">Search filters</h1>
               <IoCloseCircleOutline
                 size={25}
                 className="absolute right-5 top-5 cursor-pointer"
                 onClick={() => setFilterOpen((prev) => !prev)}
               />
-              <table className="mt-4">
-                <tr className="w-full text-start border-b">
+              <table className="mt-4 ml-[5rem]">
+                <tr className="w-full text-center border-b">
                   <th>SortBy</th>
                 </tr>
                 <tr className="flex flex-col gap-2 text-slate-400 cursor-pointer">

@@ -8,13 +8,15 @@ function AuthLayout({ children, authentication }) {
   const navigate = useNavigate();
   const authStates = useSelector((state) => state.auth.status);
 
+  console.log("authStates",authStates, "authentication", authentication);
+  
   useEffect(() => {
-    if (authentication && authStates !== authentication) {
+    if (!authentication && authStates !== authentication) {
       return;
     }
   }, [authStates, authentication, navigate]);
 
-  if (!authentication && authStates === "authenticated") {
+  if (authentication && authStates !== authentication) {
     return <LoginPopup />;
   }
   return children;
