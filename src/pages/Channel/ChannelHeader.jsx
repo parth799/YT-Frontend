@@ -155,12 +155,12 @@ function ChannelHeader({
                 </Button>
 
                 {isOfficialMember && localIsSubscribed ? (
-                  <Button
+                  <p
                     disabled
-                    className="border-slate-500 cursor-default transition-all text-black font-bold px-4 py-1 bg-green-500"
+                    className="border-slate-500 cursor-default transition-all text-black text-[13px] px-4 sm:px-1 py-1 bg-green-500"
                   >
                     You are an official member
-                  </Button>
+                  </p>
                 ) : (
                   localIsSubscribed && (<Button
                     onClick={makePayment}
