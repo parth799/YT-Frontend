@@ -31,17 +31,17 @@ function EditAvatar({ cover, preImage }) {
   };
   return (
     <>
-      <form onSubmit={handleSubmit(upload)} className="relative">
+      <form onSubmit={handleSubmit(upload)} className="">
         <MdOutlineCloudUpload
-          className="hover:text-gray-200 text-black rounded-md bg-white opacity-80 hover:opacity-100 p-1 cursor-pointer"
+          className={`hover:text-gray-200 text-black rounded-md bg-white opacity-80 hover:opacity-100 p-1 cursor-pointer top-[-37px] ${preImage ? "sm:top-[-37px]" : ""}`}
           size={35}
           onClick={() => setIsOpen((prev) => !prev)}
         />
         {isOpen && (
           <div className="fixed z-50 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70">
-            <div className="bg-black p-8 relative border shadow-lg w-full max-w-md">
+            <div className="bg-black p-8  border shadow-lg w-full max-w-md">
               <button
-                className="absolute top-5 right-5 text-white hover:text-gray-200"
+                className=" top-5 right-5 text-white hover:text-gray-200"
                 onClick={() => setIsOpen(false)}
               >
                 <MdClose size={20} />
